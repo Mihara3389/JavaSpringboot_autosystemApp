@@ -19,11 +19,15 @@ repositories {
 }
 
 dependencies {
+	//MySQLに接続するための設定
+	 compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.20'
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.1'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-websocket'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
