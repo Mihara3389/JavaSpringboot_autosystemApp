@@ -22,22 +22,28 @@ import com.example.service.UserDetailsServiceImpl;
 //インポートされ利用するのに必要なコンポート定義が自動実施
 @EnableWebSecurity
 //WebSecurityConfigurerAdapterを継承する。
-//これによってデフォルトで適用されるBean定義を簡単にカスタマイズ出来る  
+//これによってデフォルトで適用されるBean定義を簡単にカスタマイズ出来る 
+
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	//UserDetailsServiceを利用出来るように＠Autowiredしておく
 	@Autowired
     private UserDetailsServiceImpl userDetailsService;
+    //private UserEntity userEntity;
 
-	//認証用パスワードはハッシュ化して扱うためPasswordをハッシュ化する際に必要なBCryptPasswordEncoder()を返すメソッドを作成しておく。
+	//認証用パスワードはハッシュ化して扱うためPasswordをハッシュ化する際に
+	//必要なBCryptPasswordEncoder()を返すメソッドを作成しておく。
     @Bean
     public PasswordEncoder passwordEncoder() {
-
-    	BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
     	
-	//これはハッシュ化済みの値をDBに登録する確認用に出力させるコード//
-	String password = "1234";
-        String digest = bCryptPasswordEncoder.encode(password);
-        System.out.println("ハッシュ値 = " + digest);
+    	PasswordEncoder passwordencoder = new BCryptPasswordEncoder();
+    //	String nw_password = passwordencoder.encode(userEntity.getPassword());
+    //	System.out.println(nw_password);
+    	
+    ///////////////////////////////////////////////////////////////
+    //これはハッシュ化済みの値をDBに登録する確認用に出力させるコード//
+		String password = "1234";
+		String digest = passwordencoder.encode(password);
+		System.out.println("ハッシュ値 = " + digest);
 	///////////////////////////////////////////////////////////////
 
         return new BCryptPasswordEncoder();

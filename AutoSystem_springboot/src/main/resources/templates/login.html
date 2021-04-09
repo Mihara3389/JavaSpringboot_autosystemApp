@@ -7,7 +7,7 @@
 <body>
 	<p>ログイン</p>
 	<p th:if="${ErrorMessage!=null}" th:text="${ErrorMessage}">
-    <form th:action="@{/login}" method="post">
+    <form th:action="@{/login}" method="post" th:object="${login}">
       <div >ユーザー名</div>
         <input type="text" id="username" name="username" placeholder="ユーザ名" required autofocus>
       <div >パスワード</div>
