@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+	<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ホーム画面</title>
+  <link href="/css/top.css" th:href="@{/css/top.css}" rel="stylesheet"></link>
+</head>
+</head>
+<body>
+ <form role="form" id="top" th:action="@{/top}" method="post">
+	<div class ="top_logout">
+
+		<input type="hidden"  name="action" value="logout" ><br>
+		<input type="submit"  value="logout" >
+	</div>
+</form>
+	<div class ="top-button">
+		<input type="submit"  class ="button" name="list" value="問題と答えを確認・登録する　＞" ><br><br>
+		<input type="submit"  class ="button" name="test" value="テストをする　＞"><br><br>
+	<form action="/AutoSystem/HistoryServlet" method="get">
+		<input type="submit"  class ="button" name="history" value="過去の採点結果をみる　＞"><br><br>
+	</form>
+	</div>
+</body>
+</html>

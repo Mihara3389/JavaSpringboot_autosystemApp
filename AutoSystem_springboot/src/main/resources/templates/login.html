@@ -1,18 +1,27 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-    <meta charset="UTF-8">
-    <title>ログイン</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" href="../webjars/bootstrap/3.3.1/css/bootstrap.min.css" type="text/css"></link>
+    <link rel="stylesheet" href="../css/login.css" type="text/css"></link>
+  <title>ログインフォーム</title>
 </head>
 <body>
-	<p>ログイン</p>
-	<p th:if="${ErrorMessage!=null}" th:text="${ErrorMessage}">
-    <form th:action="@{/login}" method="post" th:object="${login}">
-      <div >ユーザー名</div>
-        <input type="text" id="username" name="username" placeholder="ユーザ名" required autofocus>
-      <div >パスワード</div>
-		<input type="password" id="password" name="password" placeholder="パスワード" required>
-      <div ><button type="submit">ログイン</button></div>
-    </form>
+<h1>ログインフォーム</h1>
+   <form role="form" id="login" th:action="@{/login}" method="post">
+        <div th:if="${ErrorMessage!=null}" th:text="${ErrorMessage}" style="color:red;"></div>
+        <table class="login_center">
+        <tr>
+        	<td class ="id">id:</td>
+        	<td><input type="text" id="username" name="username" size="40" maxlength="30" placeholder="Userid" autofocus="autofocus" /></td>
+        </tr>
+        <tr>
+	        <td class = "pass">pw:</td>
+       		<td><input type="password" id="password" name="password" size="40" maxlength="30" placeholder="Password" /></td>
+        </tr>
+ 		</table>
+       <div><button class = "submit"type="submit">login</button></div>
+   </form>
 </body>
 </html>

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.entity.UserEntity;
 import com.example.repository.UserRepository;
+import com.mysql.cj.exceptions.PasswordExpiredException;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService{
@@ -19,6 +20,11 @@ public class UserDetailsServiceImpl implements UserDetailsService{
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     	UserEntity user = userRepository.findByUsernameEquals(username);
     	return user;
-
     }
+    public UserDetails loadUserByPassword(String password) throws PasswordExpiredException {
+    	UserEntity pass = userRepository.findByPasswordEquals(password);
+    	return pass;
+    }
+
+	
 }

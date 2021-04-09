@@ -1,4 +1,4 @@
-package com.example.controller;
+package com.example;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder.BCryptVersion;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.example.service.UserDetailsServiceImpl;
@@ -23,8 +24,9 @@ import com.example.service.UserDetailsServiceImpl;
 @EnableWebSecurity
 //WebSecurityConfigurerAdapterを継承する。
 //これによってデフォルトで適用されるBean定義を簡単にカスタマイズ出来る 
-
+// Spring Securityの基本設定
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
 	//UserDetailsServiceを利用出来るように＠Autowiredしておく
 	@Autowired
     private UserDetailsServiceImpl userDetailsService;
@@ -35,7 +37,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public PasswordEncoder passwordEncoder() {
     	
-    	PasswordEncoder passwordencoder = new BCryptPasswordEncoder();
+    	//ハッシュ化するユーザのパスワードを設定する。
+    	PasswordEncoder passwordencoder = new BCryptPasswordEncoder(getPassword());
     //	String nw_password = passwordencoder.encode(userEntity.getPassword());
     //	System.out.println(nw_password);
     	
@@ -49,39 +52,49 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    /**
+    private BCryptVersion getPassword() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
+
+	/**
      * 認可設定を無視するリクエストを設定
      */
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring()
-        		//セキュリティ対策が不要なリソースがある場合は
-        		//SpringSecurityの処理を適用しないように設定
-        		.antMatchers("/resources/**");
+       // セキュリティ設定を無視するリクエスト設定
+        // 静的リソース(images、css、javascript)に対するアクセスはセキュリティ設定を無視する
+        web.ignoring().antMatchers(
+                            "/images/**",
+                            "/css/**",
+                            "/javascript/**",
+                            "/webjars/**");
     }
 
     /**
      * 認証・認可の情報を設定する
      */
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-            .authorizeRequests()
-            	//ログインformをすべてのユーザーがアクセス可能に
-            	.antMatchers("/login").permitAll()
-            	//全てのURLリクエストは認証されているユーザーしかアクセスできないように
-                .anyRequest().authenticated();
-        http
-        	//formLoginメソッドを呼び出しフォーム認証を有効に
-        	.formLogin()
-        		.loginPage("/login")
-        		.usernameParameter("username")
-				.passwordParameter("password")
-				//ログイン成功時の遷移先指定
-                .defaultSuccessUrl("/sample", true)
-                .failureUrl("/eroor").permitAll();
+  
+   	  @Override
+    	  protected void configure(HttpSecurity http) throws Exception {
+    		  http
+    		  .authorizeRequests()
+    		  //ログインformをすべてのユーザーがアクセス可能に
+    		  .antMatchers("/login").permitAll()
+    		  //全てのURLリクエストは認証されているユーザーしかアクセスできないように
+    		  .anyRequest().authenticated();
+    		  http
+    		  //formLoginメソッドを呼び出しフォーム認証を有効に
+    		  .formLogin()
+    		  .loginPage("/login")
+    		  .usernameParameter("username")
+    		  .passwordParameter("password")
+    		  //ログイン成功時の遷移先指定
+    		  .defaultSuccessUrl("/sample", true)
+    		  .failureUrl("/eroor").permitAll();
+    		  
     }
-
+  
     /**
      * 認証時に利用するデータソースを定義する設定メソッド
      * ここではDBから取得したユーザ情報をuserDetailsServiceへセットすることで認証時の比較情報としている
@@ -90,4 +103,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(AuthenticationManagerBuilder auth) throws Exception{
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
+    
 }

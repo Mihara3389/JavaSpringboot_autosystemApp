@@ -1,0 +1,17 @@
+  
+@charset "UTF-8";
+
+.top_rightside {
+    margin-left: 740px;
+}
+
+.top_center {
+    margin: 60px;
+    text-align: center;
+}
+
+.top_submit {
+    width: 250px;
+    height: 25px;
+    text-align: left;
+}

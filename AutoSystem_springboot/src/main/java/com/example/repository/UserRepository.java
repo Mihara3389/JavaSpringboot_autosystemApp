@@ -9,4 +9,5 @@ import com.example.entity.UserEntity;
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Integer>{
 	UserEntity findByUsernameEquals(String username);
+	UserEntity findByPasswordEquals(String password);
 }
