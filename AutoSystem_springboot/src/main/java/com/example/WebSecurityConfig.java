@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder.BCryptVersion;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.example.service.UserDetailsServiceImpl;
@@ -18,44 +17,34 @@ import com.example.service.UserDetailsServiceImpl;
  * SpringSecurityを利用するための設定クラス
  * ログイン処理でのパラメータ、画面遷移や認証処理でのデータアクセス先を設定する
  */
-@Configuration
 //SpringSecurityのConfigurationクラスが
 //インポートされ利用するのに必要なコンポート定義が自動実施
-@EnableWebSecurity
+@Configuration
 //WebSecurityConfigurerAdapterを継承する。
 //これによってデフォルトで適用されるBean定義を簡単にカスタマイズ出来る 
+@EnableWebSecurity
 // Spring Securityの基本設定
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	//UserDetailsServiceを利用出来るように＠Autowiredしておく
 	@Autowired
     private UserDetailsServiceImpl userDetailsService;
-    //private UserEntity userEntity;
-
+	
 	//認証用パスワードはハッシュ化して扱うためPasswordをハッシュ化する際に
 	//必要なBCryptPasswordEncoder()を返すメソッドを作成しておく。
     @Bean
     public PasswordEncoder passwordEncoder() {
     	
     	//ハッシュ化するユーザのパスワードを設定する。
-    	PasswordEncoder passwordencoder = new BCryptPasswordEncoder(getPassword());
-    //	String nw_password = passwordencoder.encode(userEntity.getPassword());
-    //	System.out.println(nw_password);
+    	PasswordEncoder passwordencoder = new BCryptPasswordEncoder();
     	
-    ///////////////////////////////////////////////////////////////
-    //これはハッシュ化済みの値をDBに登録する確認用に出力させるコード//
+    //ハッシュ化済みの値をDBに登録する確認用に出力させるコード
 		String password = "1234";
 		String digest = passwordencoder.encode(password);
 		System.out.println("ハッシュ値 = " + digest);
-	///////////////////////////////////////////////////////////////
 
         return new BCryptPasswordEncoder();
     }
-
-    private BCryptVersion getPassword() {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
 
 	/**
      * 認可設定を無視するリクエストを設定
@@ -90,7 +79,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     		  .usernameParameter("username")
     		  .passwordParameter("password")
     		  //ログイン成功時の遷移先指定
-    		  .defaultSuccessUrl("/sample", true)
+    		  .defaultSuccessUrl("/top", true)
     		  .failureUrl("/eroor").permitAll();
     		  
     }

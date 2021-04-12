@@ -5,11 +5,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class SampleContoroller {
+public class TopContoroller {
 
-	@GetMapping("/sample")
-    public String getSamplePage(Model model) {
-        return "sample";
+	@GetMapping("/top")
+    public String getTopPage(Model model) {
+        return "top";
     }
 
 	@GetMapping("/rink")
