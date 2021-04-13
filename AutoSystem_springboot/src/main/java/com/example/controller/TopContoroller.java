@@ -12,8 +12,4 @@ public class TopContoroller {
         return "top";
     }
 
-	@GetMapping("/rink")
-    public String getRink(Model model) {
-        return "rink";
-    }
 }
