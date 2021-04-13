@@ -11,18 +11,18 @@ public class AuthenticationController {
 
 	@GetMapping("/login")//ログイン画面アクセス時はgetでリクエストが飛んでくる(デフォルト時も同様)
     public String getLogin(Model model) {
-        return "login";
+        return "/login";
     }
 
     @GetMapping("/eroor")//errorが発生した際はエラーメッセージを表示したいので違う処理に入るように制御する
     public String getLoginError(Model model) {
     	model.addAttribute("ErrorMessage","*ユーザー名もしくはパスワードが一致しません");
-        return "login";
+        return "/login";
     }
-
+    
     //デフォルトではPostでリクエストが発生。カスタマイズ時はユーザーが指定したmethodに従う。
     @PostMapping("/login")
     public String postLogin(Model model) {
-        return "sample";
+        return "/top";
     }
 }

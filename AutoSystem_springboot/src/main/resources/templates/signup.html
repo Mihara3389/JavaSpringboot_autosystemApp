@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	 <link  th:href="@{/css/signup.css}" rel="stylesheet">
+	 <link  th:href="@{/css/style.css}" rel="stylesheet">
+<title>Registration_Form</title>
+</head>
+<body>
+<div th:if="${validationError}" th:each="error : ${validationError}" style="color:red;"></div> 
+<form class="box" role="form" id="signup"  th:action="@{/signup}" method="post">
+    <a href="/user/list">キャンセル</a>
+	<h1>Registration</h1>
+    <input type="text" id="username" name="username" placeholder="Username" autofocus="autofocus" >
+    <input type="text" id="password" name="password" placeholder="Password" autofocus="autofocus" >
+    <input type="submit" class="submit" value="Signup">
+</form>
+</body>
+</html>
