@@ -11,7 +11,7 @@ import lombok.Data;
  * ユーザー情報 リクエストデータ
  */
 @Data
-public class UserRequest implements Serializable {
+public class SignupRequest implements Serializable {
 
   /**
    * 名前
