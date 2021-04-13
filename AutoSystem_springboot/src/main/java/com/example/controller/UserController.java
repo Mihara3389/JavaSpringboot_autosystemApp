@@ -54,7 +54,7 @@ public class UserController {
 	   model.addAttribute("userRequest", new UserRequest());
 
        // signup.htmlに画面遷移
-       return "login/signup";
+       return "signup";
    } 
    
    
