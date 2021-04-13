@@ -7,9 +7,9 @@
 <title>Registration_Form</title>
 </head>
 <body>
-<div th:if="${validationError}" th:each="error : ${validationError}" style="color:red;"></div> 
-<form class="box" role="form" id="signup"  th:action="@{/signup}" method="post">
+<form class="box" role="form" id="signup"  th:action="@{/signup}" th:object="${userRequest}" method="post">
 	<h1>Registration</h1>
+	<div th:if="${validationError}" th:each="error : ${validationError}" style="color:red;" th:text="${error}"></div> 
     <input type="text" id="username" name="username" placeholder="Username" autofocus="autofocus" >
     <input type="text" id="password" name="password" placeholder="Password" autofocus="autofocus" >
     <input type="submit" class="submit" value="Signup">
