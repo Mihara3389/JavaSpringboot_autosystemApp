@@ -6,6 +6,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.dto.SignupRequest;
@@ -24,6 +25,9 @@ public class SignupService {
    */
   @Autowired
   private SignupRepository signupRepository;
+  
+  @Autowired
+  PasswordEncoder passwordEncoder;
 
   /**
    * ユーザー情報 全検索
@@ -42,7 +46,8 @@ public class SignupService {
 	  
 	SignupEntity user = new SignupEntity();
     user.setUsername(userRequest.getUsername());
-    user.setPassword(userRequest.getPassword());
+	//パスワードをハッシュ化して渡すオブジェクトにセット。
+    user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
     user.setCreatedAt(timestamp);
     user.setUpdatedAt(timestamp);
     signupRepository.save(user);
