@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.example.cheack.SignupuserCheack;
 import com.example.dto.SignupRequest;
 import com.example.entity.UserEntity;
 import com.example.repository.UserRepository;
@@ -44,11 +43,17 @@ public class SignupService {
    */
   public void create(SignupRequest userRequest) {
 
-	  //ユーザーチェック用のクラス呼び出し
-	  SignupuserCheack cheack = new SignupuserCheack();
-	  boolean usercheack = cheack.isEmptyByUsername(userRequest.getUsername());
+	  //データベースに一致するユーザがいるかチェック
+	  UserEntity userEqual = userRepository.findByUsernameEquals(userRequest.getUsername());
 	  
-	  if(usercheack==false){
+	  if(userEqual != null)
+	  {
+		  System.out.println("Username has");
+		  
+	  }else {
+		
+		  System.out.println("Username not has");
+
 		  Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		  UserEntity user = new UserEntity();
 		  
@@ -58,8 +63,6 @@ public class SignupService {
 		  user.setCreatedAt(timestamp);
 		  user.setUpdatedAt(timestamp);
 		  userRepository.save(user);
-	  }else {
-		  
-	  }
+	  }  
   }
 }

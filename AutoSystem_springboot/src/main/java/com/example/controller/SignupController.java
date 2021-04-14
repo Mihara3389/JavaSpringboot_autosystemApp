@@ -68,6 +68,9 @@ public class SignupController {
 
       model.addAttribute("validationError", errorList);
       return "signup";
+    }else {
+    	
+    	
     }
 
     // ユーザー情報の登録
