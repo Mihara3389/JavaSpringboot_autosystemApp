@@ -9,9 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.example.cheack.SignupuserCheack;
 import com.example.dto.SignupRequest;
-import com.example.entity.SignupEntity;
-import com.example.repository.SignupRepository;
+import com.example.entity.UserEntity;
+import com.example.repository.UserRepository;
 
 /**
  * ユーザー情報 Service
@@ -24,7 +25,7 @@ public class SignupService {
    * ユーザー情報 Repository
    */
   @Autowired
-  private SignupRepository signupRepository;
+  private UserRepository userRepository;
   
   @Autowired
   PasswordEncoder passwordEncoder;
@@ -33,8 +34,8 @@ public class SignupService {
    * ユーザー情報 全検索
    * @return 検索結果
    */
-  public List<SignupEntity> searchAll() {
-    return signupRepository.findAll();
+  public List<UserEntity> searchAll() {
+    return userRepository.findAll();
   }
 
   /**
@@ -42,14 +43,23 @@ public class SignupService {
    * @param user ユーザー情報
    */
   public void create(SignupRequest userRequest) {
-	  Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+
+	  //ユーザーチェック用のクラス呼び出し
+	  SignupuserCheack cheack = new SignupuserCheack();
+	  boolean usercheack = cheack.isEmptyByUsername(userRequest.getUsername());
 	  
-	SignupEntity user = new SignupEntity();
-    user.setUsername(userRequest.getUsername());
-	//パスワードをハッシュ化して渡すオブジェクトにセット。
-    user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
-    user.setCreatedAt(timestamp);
-    user.setUpdatedAt(timestamp);
-    signupRepository.save(user);
+	  if(usercheack==false){
+		  Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		  UserEntity user = new UserEntity();
+		  
+		  user.setUsername(userRequest.getUsername());
+		  //パスワードをハッシュ化して渡すオブジェクトにセット。
+		  user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
+		  user.setCreatedAt(timestamp);
+		  user.setUpdatedAt(timestamp);
+		  userRepository.save(user);
+	  }else {
+		  
+	  }
   }
 }
