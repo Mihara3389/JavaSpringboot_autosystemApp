@@ -7,12 +7,14 @@
 <title>Top_Form</title>
 </head>
 <body>
-<form class="box" role="form" id="top"  th:action="@{/top}" method="post">
+<form class="box" role="form" th:action="@{/top}" method="post">
 	<h1>Top</h1>
-	<input type="submit"  class ="button" name="list" value="問題と答えを確認・登録する　＞" >
-    <input type="submit"  class ="button" name="test" value="テストをする　　　　　　　　＞">
-    <input type="submit"  class ="button" name="history" value="過去の採点結果をみる　　　　＞">
-	<a th:href="@{'/login'}">ログイン画面へ戻る</a>
+	<input type="submit"  class ="button" id="list" value="問題と答えを確認・登録する　＞" >
+    <input type="submit"  class ="button" id="test" value="テストをする　　　　　　　　＞">
+    <input type="submit"  class ="button" id="result" value="過去の採点結果をみる　　　　＞">
+</form>
+<form class="boxout" role="form" th:action="@{/logout}" method="post">
+    <input type="submit"  class ="button" value="Logout">
 </form>
 </body>
 </html>

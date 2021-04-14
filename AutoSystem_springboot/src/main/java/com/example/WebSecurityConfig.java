@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.example.service.UserDetailsServiceImpl;
 
@@ -81,7 +82,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     		  //ログイン成功時の遷移先指定
     		  .defaultSuccessUrl("/top", true)
     		  .failureUrl("/eroor").permitAll();
-    		  
+    		  //logoutメソッドを呼び出しlogoutを有効に
+    		  http
+    		  .logout()
+    		  .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+    	      //ログアウト成功後のURL
+    	      .logoutSuccessUrl("/login").permitAll(); 
     }
   
     /**
