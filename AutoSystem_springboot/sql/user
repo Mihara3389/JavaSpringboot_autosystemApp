@@ -1,0 +1,39 @@
+*テーブル一覧表示
+show tables;
+
+*テーブル作成
+create table  spring_application.user_sample(
+  id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(63) NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  deleteflag tinyint(1) DEFAULT 0 COMMENT "not deleted:0, delete:1"
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+*テーブル名変更
+rename table spring_application.user_sample to spring_application.user;
+
+*テーブル削除
+drop table spring_application.user_sample;
+drop table spring_application.user;
+
+*テーブルカラム挿入
+alter table spring_application.user add created_at datetime default null after password;
+alter table spring_application.user add updated_at datetime default null after created_at;
+alter table spring_application.user add deleted_at timestamp default null after deleteflag;
+
+*テーブル定義変更
+alter table spring_application.user modify created_at timestamp;
+alter table spring_application.user modify updated_at timestamp;
+
+*データを挿入
+INSERT INTO spring_application.user_sample (id,username,password,deleteflag) VALUES(1,'MIHARA','$2a$10$UPqh2/jd36y0WRKTmLSfmON0Q/.GIENcI9JxbwR/hHpZnbKnJNrLm',0);
+
+*行を削除
+delete from spring_application.user_sample where id = 1;
+
+*行の定義確認
+show full columns from user_sample; 
+
+*行を更新する
+update user_sample set password ='$2a$10$QqebdIfzDHA6LKIuqMx/m.3UeLzaYos2OdmkD4z2DcSf7/SySzyze'; 

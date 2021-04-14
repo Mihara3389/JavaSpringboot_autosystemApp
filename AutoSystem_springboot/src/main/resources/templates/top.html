@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	 <link  th:href="@{/css/top.css}" rel="stylesheet">
+	 <link  th:href="@{/css/style.css}" rel="stylesheet">
+<title>Top_Form</title>
+</head>
+<body>
+<form class="box" role="form" id="top"  th:action="@{/top}" method="post">
+	<h1>Top</h1>
+	<input type="submit"  class ="button" name="list" value="問題と答えを確認・登録する　＞" >
+    <input type="submit"  class ="button" name="test" value="テストをする　　　　　　　　＞">
+    <input type="submit"  class ="button" name="history" value="過去の採点結果をみる　　　　＞">
+	<a th:href="@{'/login'}">ログイン画面へ戻る</a>
+</form>
+</body>
+</html>

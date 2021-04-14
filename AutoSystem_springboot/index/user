@@ -1,0 +1,11 @@
+2021_04_08
+＜ユーザ認証手順＞
+1：AutoSystem_springbootを実行
+2:'http://localhost:8084/login'へアクセス
+4:登録されているユーザ名とパスワード：1234を入力
+5:ログイン完了画面が出ること確認
+※参考サイト
+https://github.com/WakaMorita/JavaSpring-Learning
+https://zenn.dev/waka_morita 
+ 
+ 
