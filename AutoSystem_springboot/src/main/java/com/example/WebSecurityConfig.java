@@ -69,8 +69,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     	  protected void configure(HttpSecurity http) throws Exception {
     		  http
     		  .authorizeRequests()
-    		  //ログインformをすべてのユーザーがアクセス可能に
-    		  .antMatchers("/login").permitAll()
+    		  //すべてのユーザーがアクセス可能にしたいhtml
+    		  .antMatchers("/login","/signup").permitAll()
     		  //全てのURLリクエストは認証されているユーザーしかアクセスできないように
     		  .anyRequest().authenticated();
     		  http
