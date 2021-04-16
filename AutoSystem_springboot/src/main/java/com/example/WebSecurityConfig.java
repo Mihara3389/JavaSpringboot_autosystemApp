@@ -85,6 +85,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     		  //logoutメソッドを呼び出しlogoutを有効に
     		  http
     		  .logout()
+    		  //セッションの破棄
+    		  .invalidateHttpSession(true)
+    		  //JSESSIONIDというクッキーを削除
+    		  .deleteCookies("JSESSIONID")
     		  .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
     	      //ログアウト成功後のURL
     	      .logoutSuccessUrl("/login").permitAll(); 

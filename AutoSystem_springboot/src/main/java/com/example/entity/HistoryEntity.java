@@ -8,8 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -48,16 +46,12 @@ import lombok.Data;
 	  @Column(name="created_at")
 	  private java.sql.Timestamp created_at;
 
-	  //ユーザ情報に対して多対１
-	  @ManyToOne
-	  //外部キーを設定
-	  //参照ののみの設定：insertable = false, updatable = false
-	  @JoinColumn(name="history_id", insertable = false, updatable = false)
-	  private UserEntity userEntity;
-
 	  public int getId() {
 			return this.id;
 		}
+	  public void setId(int id) {
+	        this.id = id;
+	    }
 	  
 	  public void setUserid(int user_id) {
 	        this.user_id = user_id;
@@ -83,11 +77,4 @@ import lombok.Data;
 		  return this.created_at;	
 	  }		
 	  
-	  public UserEntity getUserEntity() {
-	        return userEntity;
-	    }
-
-	  public void setUserEntity(UserEntity userEntity) {
-	       this.userEntity = userEntity;
-	   }
 	}

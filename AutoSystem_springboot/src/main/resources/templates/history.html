@@ -21,10 +21,10 @@
     </thead>
     <tbody>
         <tr th:each="historylist : ${historylist}" >
-            <td th:text="${historylist.users.username}"></td>
+           <td th:text="${#authentication.principal.username}"></td>
            <td th:text="${historylist.point}"></td>
-           <td class="center" th:text="${#dates.format(historylist.created_at, 'yyyy/MM/dd')}"></td>
-        </tr>
+           <td th:text="${#dates.format(historylist.created_at, 'yyyy/MM/dd HH:mm:ss')}"></td>
+         </tr>
   	 </table>
   </div>
   </body>

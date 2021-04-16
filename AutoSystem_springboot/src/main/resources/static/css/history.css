@@ -31,15 +31,15 @@ table{
   	font-size: 12px;
 }
 
-table th, table td {
+table td {
     border: 1px solid #ddd;
+    background-color:  #F5F5F5;
     color: #111111;
     padding: 6px;
 }
-
 table th {
-  background-color: #F5F5F5;
-}
-.center {
-  text-align: center;
+    border: 1px solid #ddd;
+    background-color: #CBFFD3;
+    color: #111111;
+    padding: 6px;
 }
