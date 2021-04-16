@@ -1,0 +1,45 @@
+ /*Logout・Topボタンのエリア内のスタイル*/
+.box{
+    width: 600px;
+    padding: 40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #191919;
+    text-align: center;
+}
+ 
+.box{
+    color: white;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+ 
+/*Logout・Topボタンのスタイル */
+/* ログアウトボタンのスタイル */
+.box a{
+	color: white;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+/*採点結果履歴一覧のスタイル */
+table{
+    width: 100%;
+    border-collapse: collapse;
+  	font-size: 12px;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    color: #111111;
+    padding: 6px;
+}
+
+table th {
+  background-color: #F5F5F5;
+}
+.center {
+  text-align: center;
+}

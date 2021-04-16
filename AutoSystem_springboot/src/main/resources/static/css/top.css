@@ -1,4 +1,4 @@
- /*トップフォームのエリア内のスタイル*/
+ /*ログインフォームのエリア内のスタイル*/
 .box{
     width: 600px;
     padding: 40px;
@@ -16,46 +16,31 @@
     font-weight: 500;
 }
  
-/* 遷移先ボタンのスタイル */
-.box input[type="submit"]{
+/* ユーザーIDとパスワード入力ボックスのスタイル */
+.box button{
     border: 0;
     background: none;
     display: block;
     margin: 20px auto;
     text-align: center;
-    border: 2px solid #2ecc71;;
-    padding: 14px 40px;
+    border: 2px solid #3498db;
+    padding: 14px 10px;
+    width: 400px;
     outline: none;
     color: white;
     border-radius: 24px;
     transition: 0.25s;
-    cursor: pointer;
 }
  
-/* ボタンをマウスオーバーしたときのスタイル */
-.box input[type="submit"]:hover{
-    background: #2ecc71;
-     
+/* 入力ボックスがフォーカスされたときのスタイル（幅が大きくなる＆枠の色が変わる） */
+.box button:focus{
+    width: 500px;
+    border-color: #2ecc71;
 }
 
- /*セカンドフォームのエリア内のスタイル*/
-.boxout input[type="submit"]{
-    border: 0;
-    background: none;
-    display: block;
-    margin: 20px auto;
-    text-align: center;
-    border: 2px solid #2ecc71;;
-    padding: 14px 40px;
-    outline: none;
-    color: white;
-    border-radius: 24px;
-    transition: 0.25s;
-    cursor: pointer;
-}
- 
-/* ログアウトボタンをマウスオーバーしたときのスタイル */
-.boxout input[type="submit"]:hover{
-    background: #2ecc71;
-     
+/* ログアウトボタンのスタイル */
+.box a{
+	color: white;
+    text-transform: uppercase;
+    font-weight: 500;
 }

@@ -9,12 +9,11 @@
 <body>
 <form class="box" role="form" th:action="@{/top}" method="post">
 	<h1>Top</h1>
-	<input type="submit"  class ="button" id="list" value="問題と答えを確認・登録する　＞" >
-    <input type="submit"  class ="button" id="test" value="テストをする　　　　　　　　＞">
-    <input type="submit"  class ="button" id="result" value="過去の採点結果をみる　　　　＞">
-</form>
-<form class="boxout" role="form" th:action="@{/logout}" method="post">
-    <input type="submit"  class ="button" value="Logout">
+    <button type="submit" name="action" value="list">問題と答えを確認・登録する　＞</button>  
+    <button type="submit" name="action" value="test">テストをする　　　　　　　　＞</button>
+    <button type="submit" name="action" value="history">過去の採点結果をみる　　　　＞</button>
+  	<br />
+	<a th:href="@{'/logout'}" >logout</a>
 </form>
 </body>
 </html>

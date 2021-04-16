@@ -2,25 +2,23 @@ package com.example.entity;
 
 import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import lombok.Getter;
-import lombok.Setter;
-
 //ユーザー情報Entity
 
 @Entity
-@Getter
-@Setter
 @Table(name="user")
 public class UserEntity implements UserDetails{
 
@@ -46,6 +44,9 @@ public class UserEntity implements UserDetails{
 	
 	@Column(name="deleted_at")
 	private java.sql.Timestamp deleted_at;
+	
+	@OneToMany(mappedBy="userEntity", cascade=CascadeType.ALL)
+    private List<HistoryEntity> historyEntity;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities(){
@@ -128,4 +129,12 @@ public class UserEntity implements UserDetails{
 	public boolean isEnabled() {
 		return true;
 	}
+	
+	public List<HistoryEntity> getEquipments() {
+        return historyEntity;
+    }
+
+    public void setEquipments(List<HistoryEntity> historyEntity) {
+        this.historyEntity = historyEntity;
+    }
 }
