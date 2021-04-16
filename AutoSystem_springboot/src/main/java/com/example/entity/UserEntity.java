@@ -51,7 +51,15 @@ public class UserEntity implements UserDetails{
 	public Collection<? extends GrantedAuthority> getAuthorities(){
 		return null;
 	}
-
+	
+	public void setId(int id) {
+        this.id = id;
+    }
+	
+	public int getId() {
+		return this.id;
+	}
+	
 	public void setUsername(String username) {
         this.username = username;
     }
