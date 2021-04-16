@@ -35,15 +35,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	//必要なBCryptPasswordEncoder()を返すメソッドを作成しておく。
     @Bean
     public PasswordEncoder passwordEncoder() {
-    	
-    	//ハッシュ化するユーザのパスワードを設定する。
-    	//PasswordEncoder passwordencoder = new BCryptPasswordEncoder();
-    	
-    	//ハッシュ化済みの値をDBに登録する確認用に出力させるコード
-    	//	String password = "1234";
-    	//	String digest = passwordencoder.encode(password);
-    	//	System.out.println("ハッシュ値 = " + digest);
-
         return new BCryptPasswordEncoder();
     }
 
