@@ -72,8 +72,7 @@ public class UserEntity implements UserDetails{
 	public void setCreatedAt(java.sql.Timestamp created_at) {
         this.created_at = created_at;
     }
-	
-	
+		
 	public Timestamp getCreatedAt() {
 		return this.created_at;
 	}
@@ -86,10 +85,6 @@ public class UserEntity implements UserDetails{
 		return this.updated_at;
 	}
 
-	public Timestamp getUpdateddAt() {
-		return this.created_at;
-	}
-	
 	public void setDeleteFlag(Byte deleteflag) {
         this.deleteflag = deleteflag;
     }
@@ -104,8 +99,8 @@ public class UserEntity implements UserDetails{
 	
 	public Timestamp getDeletedAt() {
 		return this.deleted_at;
-	}
-	
+	}	
+
 	@Override
 	public boolean isAccountNonExpired() {
 		return true;
@@ -125,5 +120,4 @@ public class UserEntity implements UserDetails{
 	public boolean isEnabled() {
 		return true;
 	}
-
 }
