@@ -7,11 +7,11 @@ create table  spring_application.histories(
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 *データを挿入
-INSERT INTO spring_application.histories (id,user_id,point,createed_at) VALUES(1,1,90,0);
-INSERT INTO spring_application.histories (id,user_id,point,createed_at) VALUES(2,2,70,0);
-INSERT INTO spring_application.histories (id,user_id,point,createed_at) VALUES(3,3,56,0);
-INSERT INTO spring_application.histories (id,user_id,point,createed_at) VALUES(4,4,34,0);
-INSERT INTO spring_application.histories (id,user_id,point,createed_at) VALUES(5,2,60,0);
+INSERT INTO spring_application.histories (id,user_id,point,createed_at) VALUES(1,5,90,0);
+INSERT INTO spring_application.histories (id,user_id,point,createed_at) VALUES(2,5,70,0);
+INSERT INTO spring_application.histories (id,user_id,point,createed_at) VALUES(3,7,56,0);
+INSERT INTO spring_application.histories (id,user_id,point,createed_at) VALUES(4,4,87,0);
+INSERT INTO spring_application.histories (id,user_id,point,createed_at) VALUES(5,2,100,0);
 
 *列の名前変更
 alter table histories rename column createed_at to created_at;
