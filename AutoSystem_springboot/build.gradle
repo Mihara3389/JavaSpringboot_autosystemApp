@@ -33,13 +33,18 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 	//MySQLに接続するための設定
-	 compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.20'
+	compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.20'
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.1'
 	//Webjar
 	implementation 'org.webjars:bootstrap:4.3.1'
 	implementation 'org.webjars:jquery:3.4.1'
 	//バリデーション
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	//セッション管理
+	implementation('org.springframework.boot:spring-boot-starter-web')
+    implementation('org.springframework.boot:spring-boot-starter-data-jpa')
+    implementation("org.springframework.session:spring-session-core")
+    implementation("org.springframework.session:spring-session-jdbc")
 }
 
 test {

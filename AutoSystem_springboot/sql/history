@@ -1,0 +1,17 @@
+*テーブル作成
+create table  spring_application.histories(
+  id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  user_id int NOT NULL,
+  point int NOT NULL,
+  createed_at timestamp NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+*データを挿入
+INSERT INTO spring_application.histories (id,user_id,point,createed_at) VALUES(1,5,90,0);
+INSERT INTO spring_application.histories (id,user_id,point,createed_at) VALUES(2,5,70,0);
+INSERT INTO spring_application.histories (id,user_id,point,createed_at) VALUES(3,7,56,0);
+INSERT INTO spring_application.histories (id,user_id,point,createed_at) VALUES(4,4,87,0);
+INSERT INTO spring_application.histories (id,user_id,point,createed_at) VALUES(5,2,100,0);
+
+*列の名前変更
+alter table histories rename column createed_at to created_at;

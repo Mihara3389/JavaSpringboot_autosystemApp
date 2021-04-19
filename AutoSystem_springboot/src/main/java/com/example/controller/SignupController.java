@@ -13,7 +13,6 @@ import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -50,15 +49,7 @@ public class SignupController {
        // signup.htmlに画面遷移
        return "signup";
    } 
-   
-   
-   @PostMapping(params="id=login_signup")
-   public String postSignUp(Model model) {
-
-       // login.htmlにリダイレクト
-       return "redirect:/login";
-   }
-
+  
   /**
    * ユーザー新規登録
    * @param userRequest リクエストデータ

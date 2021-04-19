@@ -1,0 +1,21 @@
+*テーブル一覧表示
+show tables;
+
+*テーブル作成
+create table  spring_application.questions(
+  id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  question VARCHAR(511) NOT NULL,
+  created_at timestamp NOT NULL,
+  updated_at timestamp
+ ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+create table  spring_application.correct_answers(
+  id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  question_id int NOT NULL,
+  answer VARCHAR(255) NOT NULL,
+  created_at timestampNOT NULL,
+  updated_at timestamp 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+*行の定義確認
+show full columns from correct_answers; 

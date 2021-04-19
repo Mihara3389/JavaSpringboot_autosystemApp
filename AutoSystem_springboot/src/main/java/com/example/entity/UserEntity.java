@@ -13,14 +13,9 @@ import javax.persistence.Table;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import lombok.Getter;
-import lombok.Setter;
-
 //ユーザー情報Entity
 
 @Entity
-@Getter
-@Setter
 @Table(name="user")
 public class UserEntity implements UserDetails{
 
@@ -46,12 +41,20 @@ public class UserEntity implements UserDetails{
 	
 	@Column(name="deleted_at")
 	private java.sql.Timestamp deleted_at;
-
+	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities(){
 		return null;
 	}
-
+	
+	public void setId(int id) {
+        this.id = id;
+    }
+	
+	public int getId() {
+		return this.id;
+	}
+	
 	public void setUsername(String username) {
         this.username = username;
     }
@@ -72,8 +75,7 @@ public class UserEntity implements UserDetails{
 	public void setCreatedAt(java.sql.Timestamp created_at) {
         this.created_at = created_at;
     }
-	
-	
+		
 	public Timestamp getCreatedAt() {
 		return this.created_at;
 	}
@@ -86,10 +88,6 @@ public class UserEntity implements UserDetails{
 		return this.updated_at;
 	}
 
-	public Timestamp getUpdateddAt() {
-		return this.created_at;
-	}
-	
 	public void setDeleteFlag(Byte deleteflag) {
         this.deleteflag = deleteflag;
     }
@@ -104,8 +102,8 @@ public class UserEntity implements UserDetails{
 	
 	public Timestamp getDeletedAt() {
 		return this.deleted_at;
-	}
-	
+	}	
+
 	@Override
 	public boolean isAccountNonExpired() {
 		return true;
@@ -125,5 +123,5 @@ public class UserEntity implements UserDetails{
 	public boolean isEnabled() {
 		return true;
 	}
-
+	
 }

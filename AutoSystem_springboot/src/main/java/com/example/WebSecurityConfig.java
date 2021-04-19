@@ -35,15 +35,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	//必要なBCryptPasswordEncoder()を返すメソッドを作成しておく。
     @Bean
     public PasswordEncoder passwordEncoder() {
-    	
-    	//ハッシュ化するユーザのパスワードを設定する。
-    	//PasswordEncoder passwordencoder = new BCryptPasswordEncoder();
-    	
-    	//ハッシュ化済みの値をDBに登録する確認用に出力させるコード
-    	//	String password = "1234";
-    	//	String digest = passwordencoder.encode(password);
-    	//	System.out.println("ハッシュ値 = " + digest);
-
         return new BCryptPasswordEncoder();
     }
 
@@ -69,9 +60,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     	  protected void configure(HttpSecurity http) throws Exception {
     		  http
     		  .authorizeRequests()
-    		  //すべてのユーザーがアクセス可能にしたいhtml
+    		  //すべてのユーザーがアクセス可能にしたいURL
     		  .antMatchers("/login","/signup").permitAll()
-    		  //全てのURLリクエストは認証されているユーザーしかアクセスできないように
+    		  //上記に記載したURL以外は認証後のみ閲覧可能
     		  .anyRequest().authenticated();
     		  http
     		  //formLoginメソッドを呼び出しフォーム認証を有効に
@@ -85,6 +76,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     		  //logoutメソッドを呼び出しlogoutを有効に
     		  http
     		  .logout()
+    		  //セッションの破棄
+    		  .invalidateHttpSession(true)
+    		  //JSESSIONIDというクッキーを削除
+    		  .deleteCookies("JSESSIONID")
     		  .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
     	      //ログアウト成功後のURL
     	      .logoutSuccessUrl("/login").permitAll(); 

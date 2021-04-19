@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link  th:href="@{/css/history.css}" rel="stylesheet">
+	<link  th:href="@{/css/style.css}" rel="stylesheet">
+<title>Result_History</title>
+</head>
+<body>
+<div class="box">
+	<a th:href="@{'/top'}" >top</a>
+	<a th:href="@{'/logout'}" >logout</a>
+	<h1>履歴</h1>
+    <table>
+    <thead>
+      <tr>
+        <th>氏名</th>
+        <th>採点</th>
+        <th>採点時間</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr th:each="historyList : ${historyList}" >
+           	<td th:text="${#authentication.principal.username}"></td>
+         	<td th:text="${historyList.point}"></td>
+          	<td th:text="${#dates.format(historyList.created_at,'yyyy/MM/dd HH:mm:ss')}"></td>
+        </tr>
+  	 </table>
+  </div>
+  </body>
+</html>
