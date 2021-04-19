@@ -1,0 +1,46 @@
+ /*テストボタンのエリア内のスタイル*/
+.h1{
+    color: white;
+    text-transform: uppercase;
+    font-weight: 500;
+    text-align: center;
+}
+ 
+/* 質問・答えのスタイル */
+.center{
+    text-align: center;
+}
+
+.center{
+    text-align: left;
+}
+
+/* Cheackボタンのスタイル */
+.input[type="submit"]{
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #2ecc71;;
+    padding: 14px 40px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+    cursor: pointer;
+}
+ 
+/* Cheackボタンをマウスオーバーしたときのスタイル */
+.input[type="submit"]:hover{
+    background: #2ecc71;
+     text-align: center;
+}
+
+/* トップ・ログアウトボタンのスタイル */
+.a{
+	color: white;
+    text-transform: uppercase;
+    font-weight: 500;
+    text-align: center;
+}

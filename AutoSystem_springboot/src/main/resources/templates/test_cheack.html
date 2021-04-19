@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	 <link  th:href="@{/css/test.css}" rel="stylesheet">
+	 <link  th:href="@{/css/style.css}" rel="stylesheet">
+<title>Test_Form</title>
+</head>
+<body>
+	<a th:href="@{'/top'}" >top</a>
+	<a th:href="@{'/logout'}" >logout</a>
+	<h1>テスト結果</h1>
+	<div th:each="resultList : ${resultList}" >
+	    <p th:text="${#authentication.principal.username}">さん</p>
+	    <p th:text="${resultList.question_count}">問中</p><p th:text="${resultList.correct_count}">問正解です。</p>
+ 	    <p th:text="${resultList.result}">点でした。</p>
+ 	    <p th:text="${resultList.currenTime}"></p>
+ 	</div>
+</body>
+</html>
