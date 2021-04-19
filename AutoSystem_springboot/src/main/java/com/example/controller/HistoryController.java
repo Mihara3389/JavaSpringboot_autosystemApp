@@ -45,14 +45,10 @@ import com.example.service.HistoryService;
 			//ログイン中のidと採点結果履歴DB内のuser_idと照合
 			if(loginId == listId) {
 				//一致するデータがある場合は、得点と登録日を取得
-				historyList.add(histories.get(i));
-				model.addAttribute("historyList", historyList);				
+				historyList.add(histories.get(i));								
 				}
 		}
-		//一致する採点結果履歴がなかったらデータなしで画面へ
-		if(historyList.isEmpty()){
-			model.addAttribute("historyList", historyList);
-		}
+		model.addAttribute("historyList", historyList);
 		return "history";
 	}
 }
