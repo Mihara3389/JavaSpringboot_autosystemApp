@@ -19,3 +19,27 @@ create table  spring_application.correct_answers(
 
 *行の定義確認
 show full columns from correct_answers; 
+
+*question追加
+INSERT INTO spring_application.questions (id,question,created_at,updated_at) VALUES(1,"2017年世界のイケメンランキングで１位になったのは？","2021-04-16 20:46:58",0);
+INSERT INTO spring_application.questions (id,question,created_at,updated_at) VALUES(2,"高音で歌うメインボーカルは？","2021-04-16 20:46:58",0);
+INSERT INTO spring_application.questions (id,question,created_at,updated_at) VALUES(3,"漢字でBTSはどのように書く？","2021-04-16 20:46:58",0);
+INSERT INTO spring_application.questions (id,question,created_at,updated_at) VALUES(5,"BTSのデビュー年月日？","2021-04-16 20:46:58",0);
+
+*quetsion更新
+update questions set updated_at ='2021-04-16 20:46:58'; 
+
+*correct_answers追加
+INSERT INTO spring_application.correct_answers (id,question_id,answer,created_at,updated_at) VALUES(1,1,"V","2021-04-16 20:46:58",0);
+INSERT INTO spring_application.correct_answers (id,question_id,answer,created_at,updated_at) VALUES(2,1,"テテ","2021-04-16 20:46:58",0);
+INSERT INTO spring_application.correct_answers (id,question_id,answer,created_at,updated_at) VALUES(3,1,"てて","2021-04-16 20:46:58",0);
+INSERT INTO spring_application.correct_answers (id,question_id,answer,created_at,updated_at) VALUES(4,1,"てひょん","2021-04-16 20:46:58",0);
+INSERT INTO spring_application.correct_answers (id,question_id,answer,created_at,updated_at) VALUES(5,1,"テヒョン","2021-04-16 20:46:58",0);
+INSERT INTO spring_application.correct_answers (id,question_id,answer,created_at,updated_at) VALUES(6,1,"キム・テヒョン","2021-04-16 20:46:58",0);
+INSERT INTO spring_application.correct_answers (id,question_id,answer,created_at,updated_at) VALUES(7,2,"ジミン","2021-04-16 20:46:58",0);
+INSERT INTO spring_application.correct_answers (id,question_id,answer,created_at,updated_at) VALUES(8,2,"ちむちむ","2021-04-16 20:46:58",0);
+INSERT INTO spring_application.correct_answers (id,question_id,answer,created_at,updated_at) VALUES(9,3,"防弾少年団","2021-04-16 20:46:58",0);
+INSERT INTO spring_application.correct_answers (id,question_id,answer,created_at,updated_at) VALUES(10,4,"2013年6月13日","2021-04-16 20:46:58",0);
+
+*correct_answers更新
+update correct_answers set updated_at ='2021-04-16 20:46:58'; 

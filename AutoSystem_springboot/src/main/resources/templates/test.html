@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	 <link  th:href="@{/css/test.css}" rel="stylesheet">
+	 <link  th:href="@{/css/style.css}" rel="stylesheet">
+<title>Test_Form</title>
+</head>
+<body>
+<form role="form" id="test"  th:action="@{/test}" method="post">
+	<a th:href="@{'/top'}" >top</a>
+	<a th:href="@{'/logout'}" >logout</a>
+	<h1>テスト</h1>
+    <table th:each="questions : ${questions}" >
+   	<tr>
+		<td th:text="${questions.id}" class=center></td>
+		<td th:text="${questions.question}" class=left></td>
+    </tr>
+    <tr>
+    	<td class=center>回答</td>
+		<td><input type="text" id="answer" name="answer" placeholder="Answer"  class=left></td>
+  	</tr>
+	</table>
+	<input type="submit" class="submit" value="Cheack">
+</form>
+</body>
+</html>
