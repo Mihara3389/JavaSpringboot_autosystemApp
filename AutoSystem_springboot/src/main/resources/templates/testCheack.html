@@ -10,23 +10,19 @@
 	<a th:href="@{'/top'}" >top</a>
 	<a th:href="@{'/logout'}" >logout</a>
 	<h1>テスト結果</h1>
-	<table th:object=${resultForm}>
-	<tr>
-		<td th:field="${#authentication.principal.username}"></td>
-	</tr>
-	<tr>
-		<td th:text="*{question_count}"></td>
-	</tr>
-	<tr>
-		<td th:text="*{correct_count}"></td>
-	</tr>
-	<tr>
-		<td th:text="*{resultTest}"></td>
-	</tr>
-	<tr>
-		<td th:text="*{currenTime}"></td>
-	</tr>
- 	</table>
-
+	<table>
+    	<tr>
+    	 <td th:text="${#authentication.principal.username} + 'さん'"></td>
+    	</tr>
+    	<tr>
+    	 <td th:text="${resultForm.getQuestioncount()}+'問中'+ ${resultForm.getCorrectcount()}+'問正解です。'"></td>
+    	</tr>
+    	<tr>
+   	     <td th:text="${resultForm.getResulttest()}+'点でした。'"></td>
+   	    </tr>
+   	    <tr>
+	     <td th:text="${resultForm.getCurrentime()}"></td>
+	    </tr>
+	</table>
 </body>
 </html>
