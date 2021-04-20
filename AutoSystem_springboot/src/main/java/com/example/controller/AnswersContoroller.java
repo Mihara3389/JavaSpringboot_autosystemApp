@@ -46,13 +46,17 @@ import com.example.service.AnswersService;
 		List<String> form_answer = Arrays.asList(testForm_answer.split(","));
 		//DBの答えを取得
 		List<AnswersEntity> answers = answersService.searchAll();
+		question_count=form_questions_id.size();
 		//採点チェック
-		//問題数分ループ
-		for(int i = 0; i < form_questions_id.size(); i++){
+		//答え分ループ
+		for(int i = 0; i < form_answer.size(); i++){
 			//int型を変換させる
 			int formId = Integer.parseInt(form_questions_id.get(i));
 			String formAnswer = form_answer.get(i);
-			question_count = question_count + 1;
+			//nullチェック
+			if (formAnswer == null) { 
+				continue; 
+			}
 			//答え分ループ
 			for(int j = 0; j < answers.size(); j++){
 				//問題のidと答えの問題idが一致したら
@@ -73,7 +77,7 @@ import com.example.service.AnswersService;
 			}
 		}
 		//採点を結果（小数点以下四捨五入）
-		double result = Math.round(((correct_count/question_count)*100));
+		long result = Math.round(((correct_count/question_count)*100));
 		resultForm.setQuestioncount((int) question_count);
 		resultForm.setCorrectcount((int) correct_count);
 		resultForm.setResulttest((int) result);
