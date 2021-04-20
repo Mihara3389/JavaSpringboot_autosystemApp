@@ -1,14 +1,22 @@
 package com.example.dto;
 
-public class TestForm {
-	private int questions_id;
+import java.io.Serializable;
+import java.util.List;
+
+import lombok.Data;
+
+@Data
+public class TestForm  implements Serializable{
+	private String questions_id;
 	private String questions_question;
 	private String answer;
 	
-	public int getQuestions_id() {
+	private List<TestForm> testForm;
+	
+	public String getQuestions_id() {
 		return questions_id;
 	}
-	public void setQuestions_id(int questions_id) {
+	public void setQuestions_id(String questions_id) {
 		this.questions_id = questions_id;
 	}
 	public String getQuestions_question() {
@@ -22,6 +30,12 @@ public class TestForm {
 	}
 	public void setAnswer(String answer) {
 		this.answer = answer;
+	}
+	public List<TestForm> getTestForm() {
+		return testForm;
+	}
+	public void setTestForm(List<TestForm> testForm) {
+		this.testForm = testForm;
 	}
 
 

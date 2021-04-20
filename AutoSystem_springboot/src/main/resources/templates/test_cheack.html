@@ -7,14 +7,24 @@
 <title>Test_Form</title>
 </head>
 <body>
+<form role="form" class="resultForm"  th:action="@{/test}" method="post"  th:object="${resultForm}">
 	<a th:href="@{'/top'}" >top</a>
 	<a th:href="@{'/logout'}" >logout</a>
 	<h1>テスト結果</h1>
-	<div th:each="resultList : ${resultList}" >
-	    <p th:text="${#authentication.principal.username}">さん</p>
-	    <p th:text="${resultList.question_count}">問中</p><p th:text="${resultList.correct_count}">問正解です。</p>
- 	    <p th:text="${resultList.result}">点でした。</p>
- 	    <p th:text="${resultList.currenTime}"></p>
- 	</div>
+	<table>
+	<tr>
+		<td th:field="${#authentication.principal.username}"></td>
+	</tr>
+	<tr>
+		<td><input type="text" th:field="*{questionCount}"></input></td>
+	</tr>
+	<tr>
+		<td th:text="${#authentication.principal.username}"></td>
+	</tr>
+	<tr>
+		<td th:text="${#authentication.principal.username}"></td>
+	</tr>
+ 	</table>
+</form>
 </body>
 </html>
