@@ -74,16 +74,12 @@ import com.example.service.AnswersService;
 		}
 		//採点を結果（小数点以下四捨五入）
 		double result = Math.round(((correct_count/question_count)*100));
-		int questionCount = (int) question_count;
-		int correctCount = (int) correct_count;
-		int resultTest = (int) result;
-		//取得したデータを格納する
-		resultForm.setQuestioncount(questionCount);
-		resultForm.setCorrectcount(correctCount);
-		resultForm.setResulttest(resultTest);
+		resultForm.setQuestioncount((int) question_count);
+		resultForm.setCorrectcount((int) correct_count);
+		resultForm.setResulttest((int) result);
 		resultForm.setCurrentime(currenTime);
 		//テスト結果画面へ
 		model.addAttribute("resultForm", resultForm);
-		return "test_cheack";
+		return "testCheack";
 		}
 }

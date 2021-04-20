@@ -7,24 +7,26 @@
 <title>Test_Form</title>
 </head>
 <body>
-<form role="form" class="resultForm"  th:action="@{/test}" method="post"  th:object="${resultForm}">
 	<a th:href="@{'/top'}" >top</a>
 	<a th:href="@{'/logout'}" >logout</a>
 	<h1>テスト結果</h1>
-	<table>
+	<table th:object=${resultForm}>
 	<tr>
 		<td th:field="${#authentication.principal.username}"></td>
 	</tr>
 	<tr>
-		<td><input type="text" th:field="*{questionCount}"></input></td>
+		<td th:text="*{question_count}"></td>
 	</tr>
 	<tr>
-		<td th:text="${#authentication.principal.username}"></td>
+		<td th:text="*{correct_count}"></td>
 	</tr>
 	<tr>
-		<td th:text="${#authentication.principal.username}"></td>
+		<td th:text="*{resultTest}"></td>
+	</tr>
+	<tr>
+		<td th:text="*{currenTime}"></td>
 	</tr>
  	</table>
-</form>
+
 </body>
 </html>
