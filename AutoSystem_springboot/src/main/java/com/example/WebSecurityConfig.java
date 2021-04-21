@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.example.service.UserDetailsServiceImpl;
@@ -63,7 +64,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     		  //すべてのユーザーがアクセス可能にしたいURL
     		  .antMatchers("/login","/signup").permitAll()
     		  //上記に記載したURL以外は認証後のみ閲覧可能
-    		  .anyRequest().authenticated();
+    		  .anyRequest().authenticated()
+    		  //CSRF対策機能
+    		  .and().csrf().csrfTokenRepository(new HttpSessionCsrfTokenRepository());
     		  http
     		  //formLoginメソッドを呼び出しフォーム認証を有効に
     		  .formLogin()

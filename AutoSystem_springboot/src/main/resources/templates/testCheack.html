@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	 <link  th:href="@{/css/test.css}" rel="stylesheet">
+	 <link  th:href="@{/css/style.css}" rel="stylesheet">
+<title>Test_Form</title>
+</head>
+<body>
+<div class="box">
+	<a th:href="@{'/top'}" >top</a>
+	<a th:href="@{'/logout'}" >logout</a>
+	<h1>テスト結果</h1>
+	<table>
+    	<tr>
+    	 <td th:text="${#authentication.principal.username} + 'さん'"></td>
+    	</tr>
+    	<tr>
+    	 <td th:text="${resultForm.getQuestioncount()}+'問中'+ ${resultForm.getCorrectcount()}+'問正解です。'"></td>
+    	</tr>
+    	<tr>
+   	     <td th:text="${resultForm.getResulttest()}+'点でした。'"></td>
+   	    </tr>
+   	    <tr>
+	     <td th:text="${resultForm.getCurrentime()}"></td>
+	    </tr>
+	</table>
+</div>
+</body>
+</html>
