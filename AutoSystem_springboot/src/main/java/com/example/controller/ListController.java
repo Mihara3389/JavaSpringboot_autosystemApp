@@ -34,15 +34,18 @@ import com.example.service.QuestionsService;
 	 * @return 問題一覧
 	 */
 	@RequestMapping(value="/top", method=RequestMethod.POST,params="action=list")
-	public String postHistorylist(@ModelAttribute("list") ListForm list,@ModelAttribute("listForm") ArrayList<ListForm>listForm,Model model) {
+	public String postHistorylist(@ModelAttribute("listForm") ArrayList<ListForm>listForm,Model model) {
 		//質問・答えをDBから取得
 		List<QuestionsEntity> questionsEntity = questionsService.searchAll();
 		List<AnswersEntity> answerEntity = answersService.searchAll();
 		//変数定義
 		int db_questionsId =0;
 		int db_answersId =0;
+		int count =0;
 		//questionsループ
 		for(int i = 0; i < questionsEntity.size(); i++) {
+			//カウント初期化
+			count = 0;
 			if(questionsEntity.isEmpty()) {
 				//問題・答えの新規登録画面へforward
 				return "register";
@@ -59,18 +62,21 @@ import com.example.service.QuestionsService;
 					//照合
 					db_answersId = answerEntity.get(j).getQuestion_id();
 					if(db_questionsId == db_answersId) {
+						//箱を新しくする(じゃないと同じ箱を使いまわしリスト状態にならない）
+						ListForm list = new ListForm();
+						//同じ問題IDの答え数
+						count = count+1;
 						//値をつめる
 						list.setId(db_questionsId);
 						list.setQuestion(questionsEntity.get(i).getQuestion());
-						list.setAnswer_id(db_answersId);	
+						list.setAnswer_id(count);	
 						list.setAnswer(answerEntity.get(j).getAnswer());	
 						//リストへつめる
-						listForm.add(list);		
+						listForm.add(list);
 					}
 				}
 			}
 		}
-		System.out.println(listForm);
 		model.addAttribute("listForm", listForm);
 		return "list";
 	}
