@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<link  th:href="@{/css/list.css}" rel="stylesheet">
+	<link  th:href="@{/css/style.css}" rel="stylesheet">
+<title>Result_History</title>
+</head>
+<body>
+<a th:href="@{'/top'}" >top</a>
+<a th:href="@{'/logout'}" >logout</a>
+<a th:href="@{'/register'}" >新規登録</a>
+<h1>問題一覧</h1>
+<form class="box" role="form" id="list"  th:action="@{/list}" method="post">
+<table>
+	<tr th:each="questionsList : ${questionsList}" >
+        <td th:text="${questionsList.id}"></td>
+        <td th:text="${questionsList.question}"></td>
+        <td><a th:href="@{'/edit}" >編集</a></td>
+        <td><a th:href="@{'/delete}" >削除</a> </td>
+	</tr>      
+    <tr th:each="answersList : ${answersList}" >
+        <td th:text="${${answersList}.id}"></td>
+        <td th:text="${answersList}.answer}"></td>
+	</tr>
+</table>
+</form>
+</body>
+</html>
