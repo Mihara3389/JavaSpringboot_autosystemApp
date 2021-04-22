@@ -9,4 +9,4 @@ import com.example.entity.QuestionsEntity;
  * 質問 Repository
  */
 @Repository
-public interface QuestionsRepository extends JpaRepository<QuestionsEntity,Long> {}
+public interface QuestionsRepository extends JpaRepository<QuestionsEntity,Integer> {}

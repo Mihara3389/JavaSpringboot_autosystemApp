@@ -23,6 +23,7 @@ import lombok.Data;
 	  /**
 	   * ID
 	   */
+
 	  @Id
 	  @Column(name="id")
 	  @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -51,7 +52,7 @@ import lombok.Data;
 	   */
 	  @Column(name="updated_at")
 	  private java.sql.Timestamp updated_at;
-
+	  
 	  public int getId() {
 			return this.id;
 		}
