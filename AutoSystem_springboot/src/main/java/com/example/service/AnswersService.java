@@ -35,8 +35,8 @@ public class AnswersService {
    * 質問 削除
    * 
    */
-  public void deleteAnswer(Integer question_id) {
-	  answersRepository.deleteById(question_id);
+  public void deleteAnswer(Integer id) {
+	  answersRepository.deleteById(id);
   }
 
 }
