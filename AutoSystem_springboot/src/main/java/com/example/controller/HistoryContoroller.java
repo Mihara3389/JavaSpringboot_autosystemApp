@@ -14,16 +14,15 @@ import com.example.entity.HistoryEntity;
 import com.example.entity.UserEntity;
 import com.example.service.HistoryService;
 
-	/**
-	 * 採点結果得点履歴 Controller
-	 */
-	@Controller
-	public class HistoryController {
+@Controller
+public class HistoryContoroller {
+
 	/**
 	 * 採点結果得点履歴 Service
 	 */
 	@Autowired
 	private HistoryService historyService;
+	
 	/**
 	 * 採点結果得点履歴を表示
 	 * @param model Model

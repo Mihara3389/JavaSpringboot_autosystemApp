@@ -25,4 +25,9 @@ public class AuthenticationController {
     public String postLogin(Model model) {
         return "top";
     }
+    
+	@GetMapping("/top")
+    public String getTopPage(Model model) {
+        return "top";
+    }
 }
