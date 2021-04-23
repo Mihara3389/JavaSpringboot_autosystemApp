@@ -30,4 +30,11 @@ public class QuestionsService {
   public List<QuestionsEntity> searchAll() {
     return questionsRepository.findAll();
   }
+  /**
+   * 質問 削除
+   * 
+   */
+  public void deleteQuestion(Integer id) {
+	  questionsRepository.deleteById(id);
+  }
 }

@@ -16,23 +16,20 @@ import com.example.dto.TestForm;
 import com.example.entity.AnswersEntity;
 import com.example.service.AnswersService;
 
+@Controller
+@RequestMapping(value="/test", method=RequestMethod.POST)
+public class TestResultController {
 	/**
-	 * テスト Controller
-	 */
-	@Controller
-	public class AnswersContoroller {
-	/**
-	 * テスト Service
+	 * TestResult Service
 	 */
 	@Autowired
 	private AnswersService answersService;
-
 	/**
 	 * 採点結果を表示
 	 * @param model Model
 	 * @return テスト
 	 */
-	@RequestMapping(value="/test", method=RequestMethod.POST)
+	@RequestMapping(params="action=Cheack")
 	public String postTestCheack(@ModelAttribute("testForm") TestForm testForm,@ModelAttribute("resultForm") ResultForm resultForm,Model model) {
 		//カウンターの宣言と初期化
 		double question_count=0;

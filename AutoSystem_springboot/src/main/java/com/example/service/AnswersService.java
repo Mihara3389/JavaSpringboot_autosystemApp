@@ -31,4 +31,12 @@ public class AnswersService {
   public List<AnswersEntity> searchAll() {
     return answersRepository.findAll();
   }
+  /**
+   * 質問 削除
+   * 
+   */
+  public void deleteAnswer(Integer id) {
+	  answersRepository.deleteById(id);
+  }
+
 }
