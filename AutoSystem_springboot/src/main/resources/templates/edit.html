@@ -12,20 +12,25 @@
 		<a th:href="@{'/top'}" >top</a>
 		<a th:href="@{'/logout'}" >logout</a>
 </div>
-<form class="box" role="form" id="register"  th:action="@{/register}" th:object="${confirmRequest}" method="post">
+<form class="box" role="form" id="edit"  th:action="@{/edit}" th:object="${confirmRequest}" method="post">
 	<div th:if="${validationError}" th:each="error : ${validationError}" style="color:red;" th:text="${error}"></div> 
-    <table id="tbl">
-    	<tr>	
+    <table id="tbl"  th:each="editForm : ${editForm}">
+   		<tr th:if="${editForm.getAnswer_count() eq 1}">
+    		<td>問題番号：</td>
+    		<td><input type="text" id="id"  th:name="id"  th:value="${editForm.getId()}" ></td>
+    	</tr>
+    	<tr th:if="${editForm.getAnswer_count() eq 1}">
     		<td>問題：</td>
-    		<td><input type="text" id="question" name="question" placeholder="Question" autofocus="autofocus" ></td>
+    		<td><input type="text" id="question" name="question"  th:value="${editForm.getQuestion()}" ></td>
     	</tr>
     	<tr>
     		<td>答え：</td>
-    		<td><input type="text" id="answer" name="answer" placeholder="Answer" autofocus="autofocus" ></td>
+    		<td><input type="text" id="answer" name="answer"  th:value="${editForm.getAnswer()}" >
+    		<input type="hidden" id="answer_id" name="answer_id"  th:value="${editForm.getAnswer_id()}" ></td>
     	</tr>
     </table>
     <input type="submit" name="action" value="return" >
-    <input type="submit" name="action"  value="registerCheack" >
+    <input type="submit" name="action"  value="editCheack" >
     <input type="button" id="add" name="add" value="add" onclick="appendRow()">
 </form>
 </body>
