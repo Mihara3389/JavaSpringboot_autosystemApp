@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	 <link  th:href="@{/css/register.css}" rel="stylesheet">
+	 <link  th:href="@{/css/style.css}" rel="stylesheet">
+<title>RegistConfirm</title>
+</head>
+<body>
+<div class="box">
+		<a th:href="@{'/top'}" >top</a>
+		<a th:href="@{'/logout'}" >logout</a>
+</div>
+<form class="box" role="form" id="registerConfirm"  th:action="@{/registerConfirm}" th:object="${confirmRequest}" method="post">
+	<div th:if="${validationError}" th:each="error : ${validationError}" style="color:red;" th:text="${error}"></div> 
+    <table th:each="listForm : ${listForm}"  >
+    	<tr>	
+    		<td>問題：</td>
+    		<td><input type="text" id="question" name="question" th:value="${listForm.getQuestion()}" readonly></td>
+    	</tr>
+    	<tr>
+    		<td>答え：</td>
+    		<td><input type="text" id="answer" name="answer" th:value="${listForm.getAnswer()}" readonly></td>
+    	</tr>
+    </table>
+    <input type="submit" name="action" value="return">
+    <input type="submit" name="action" value="register">
+</form>
+</body>
+</html>

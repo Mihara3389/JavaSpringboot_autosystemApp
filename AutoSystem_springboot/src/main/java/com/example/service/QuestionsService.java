@@ -31,6 +31,15 @@ public class QuestionsService {
     return questionsRepository.findAll();
   }
   /**
+   * 質問 新規登録
+ * @return 
+   * 
+   */
+  public QuestionsEntity saveQuestion(String question) {
+	  QuestionsEntity q = questionsRepository.findByQuestionEquals(question);
+  	return q;
+  }
+  /**
    * 質問 削除
    * 
    */

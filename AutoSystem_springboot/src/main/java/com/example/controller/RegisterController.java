@@ -2,6 +2,7 @@ package com.example.controller;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,6 @@ import com.example.service.QuestionsService;
  * 質問・答え Controller
  */
 @Controller
-@RequestMapping(value="/register",method=RequestMethod.POST)
 public class RegisterController {
 
   /**
@@ -49,7 +49,7 @@ public class RegisterController {
    * @param model Model
    * @return 問題・答え新規登録確認画面
    */
-  @RequestMapping(params="action=registerCheack")
+  @RequestMapping(value="/register",method=RequestMethod.POST,params="action=registerCheack")
   public String registerCk(@Validated @ModelAttribute ConfrimRequest confrimRequest, BindingResult result, Model model)
   {
      //入力値のチェック
@@ -87,13 +87,11 @@ public class RegisterController {
     		 List<ListForm> listForm = new ArrayList<ListForm>();
     		 
     		 ListForm list = new ListForm();
-    		 list.setId(Integer.parseInt(confrimRequest.getId()));
     		 list.setQuestion(confrimRequest.getQuestion());
-    		 list.setAnswer_id(Integer.parseInt(confrimRequest.getAnswer_id()));
     		 list.setAnswer(confrimRequest.getAnswer());
     		 listForm.add(list);
     		 //問題・答え確認画面へ
-		 	 model.addAttribute(listForm);
+		 	 model.addAttribute("listForm",listForm);
 		 	 return "registerConfirm";
     	 }   	
      }
@@ -104,7 +102,7 @@ public class RegisterController {
 	 * @return 
 	 * @return 新規登録
 	 */
-	@RequestMapping(params="action=return")
+	@RequestMapping(value="/register",method=RequestMethod.POST,params="action=return")
 	public String toRedirectList(@ModelAttribute("listForm") ArrayList<ListForm>listForm,Model model) {
 		//質問・答えをDBから取得
 		List<QuestionsEntity> questionsEntity = questionsService.searchAll();
@@ -128,22 +126,42 @@ public class RegisterController {
 	   * 問題・答え新規登録
 	   * @param registerRequest リクエストデータ
 	   * @param model Model
+	   * @return 新規登録画面
+	   */
+	  @RequestMapping(value="/registerConfirm",method=RequestMethod.POST,params="action=return")
+	  public String toRedirectRegister(@Validated @ModelAttribute ConfrimRequest registerRequest, BindingResult result, Model model) {
+	   
+	 		//新規登録画面へ
+	 		return "register";
+	   }
+	  /**
+	   * 問題・答え新規登録
+	   * @param registerRequest リクエストデータ
+	   * @param model Model
 	   * @return 問題一覧画面
 	   */
 	  @RequestMapping(value="/registerConfirm",method=RequestMethod.POST,params="action=register")
-	  public String create(@Validated @ModelAttribute ConfrimRequest registerRequest, BindingResult result, Model model) {
+	  public String create(@ModelAttribute("list") ListForm list,BindingResult result, Model model) {
 	   
 	 		 //現在時刻を取得
 	 		 Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+	 		//取得した問題と答えをリストへ置き換える
+	 		String listForm_question=list.getQuestion();
+	 		List<String> form_question = Arrays.asList(listForm_question.split(","));
+	 		String listForm_answer =list.getAnswer();
+	 		List<String> form_answer = Arrays.asList(listForm_answer.split(","));
 	 		 //問題の追加
 	 		 QuestionsEntity q = new QuestionsEntity();
-	 		 q.setQuestion(registerRequest.getQuestion());
+	 		 q.setQuestion(listForm_question);
 	 		 q.setCreatedAt(timestamp);
 	 		 q.setUpdatedAt(timestamp);
 	 		 quesitonsRepository.save(q);
+	 		 //追加した問題のidを取得
+	 		QuestionsEntity questionEqual = quesitonsRepository.findByQuestionEquals(listForm_question);
 	 		 //答えの追加
 	 		 AnswersEntity a = new AnswersEntity();
-	 		 a.setAnswer(registerRequest.getAnswer());
+	 		 a.setAnswer(listForm_answer);
+	 		 a.setQuestionId(questionEqual.getId());
 	 		 a.setCreatedAt(timestamp);
 	 		 a.setUpdatedAt(timestamp);
 	 		 answersRepository.save(a);		  
@@ -154,6 +172,7 @@ public class RegisterController {
 			Common com = new Common();
 			listForm = com.toCommon(questionsEntity, answerEntity, listForm);  
 	 		//問題一覧へ
+			model.addAttribute("listForm", listForm);
 	 		return "list";
 	   }
 }
