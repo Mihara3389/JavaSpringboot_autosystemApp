@@ -28,8 +28,8 @@ import com.example.service.QuestionsService;
  * 質問・答え Controller
  */
 @Controller
-@RequestMapping(value="/register",method=RequestMethod.POST)
-public class RegisterController {
+@RequestMapping(value="/edit",method=RequestMethod.POST)
+public class EditController {
 
   /**
    * 質問・答え
@@ -44,13 +44,13 @@ public class RegisterController {
   private AnswersService answersService;
 
   /**
-   * 問題・答え新規登録
+   * 問題・答え編集
    * @param registerRequest リクエストデータ
    * @param model Model
-   * @return 問題・答え新規登録確認画面
+   * @return 問題・答え編集画面
    */
-  @RequestMapping(params="action=registerCheack")
-  public String registerCk(@Validated @ModelAttribute ConfrimRequest confrimRequest, BindingResult result, Model model)
+  @RequestMapping(params="action=editCheack")
+  public String editCk(@Validated @ModelAttribute ConfrimRequest confrimRequest, BindingResult result, Model model)
   {
      //入力値のチェック
      if (result.hasErrors()) 
@@ -61,7 +61,7 @@ public class RegisterController {
          errorList.add(error.getDefaultMessage());
        }
        model.addAttribute("validationError", errorList);
-       return "register";
+       return "edit";
        
      } else 
      {
@@ -74,13 +74,13 @@ public class RegisterController {
     		 System.out.println("Question has");
     		 // データベース上にすでに存在する
     		 model.addAttribute("validationError","*入力された質問はすでに登録済です。");
-    		 return "register";
+    		 return "edit";
  		  
     	 }else if(answersEqual != null)
     	 {
     		 // データベース上にすでに存在する
     		 model.addAttribute("validationError","*入力された答えはすでに登録済です。");
-    		 return "register";  
+    		 return "edit";  
     	 }else 
     	 {
     		 System.out.println("Question&Answer not has");
@@ -94,15 +94,15 @@ public class RegisterController {
     		 listForm.add(list);
     		 //問題・答え確認画面へ
 		 	 model.addAttribute(listForm);
-		 	 return "registerConfirm";
+		 	 return "editConfirm";
     	 }   	
      }
    }
   	/**
-	 * 新規登録入力画面へ戻る
+	 * 編集画面へ戻る
 	 * @param model Model
 	 * @return 
-	 * @return 新規登録
+	 * @return 編集
 	 */
 	@RequestMapping(params="action=return")
 	public String toRedirectList(@ModelAttribute("listForm") ArrayList<ListForm>listForm,Model model) {
@@ -113,7 +113,7 @@ public class RegisterController {
 		if(questionsEntity.isEmpty()) 
 		{
 			//問題・答えの新規登録画面へforward
-			return "register";
+			return "edit";
 		}else 
 		{
 			//問題を取得
@@ -125,12 +125,12 @@ public class RegisterController {
 			return "list";
 		}
 	  /**
-	   * 問題・答え新規登録
+	   * 問題・答え編集
 	   * @param registerRequest リクエストデータ
 	   * @param model Model
 	   * @return 問題一覧画面
 	   */
-	  @RequestMapping(value="/registerConfirm",method=RequestMethod.POST,params="action=register")
+	  @RequestMapping(value="/editConfirm",method=RequestMethod.POST,params="action=edit")
 	  public String create(@Validated @ModelAttribute ConfrimRequest registerRequest, BindingResult result, Model model) {
 	   
 	 		 //現在時刻を取得

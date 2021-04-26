@@ -33,17 +33,17 @@ public class ListController
 	private QuestionsService questionsService;
 	@Autowired
 	private AnswersService answersService;
-	/**
-	 * 新規登録画面を表示
-	 * @param model Model
-	 * @return 新規登録画面
-	 */
-	@RequestMapping(params="action=register")
-	public String postRegister(Model model) 
-	{
-		model.addAttribute("confirmRequest}", new ConfrimRequest());
-		return "register";
-	}
+  /**
+   * 問題・答え新規登録画面を表示
+   * @param model Model
+   * @return 問題・答え新規登録画面
+   */
+   @RequestMapping(params="action=register")
+   public String getSignUp(Model model) {
+	   model.addAttribute("confrimRequest", new ConfrimRequest());
+       // register.htmlに画面遷移
+       return "register";
+   } 
 	/**
 	 * 編集データを表示
 	 * @param model Model

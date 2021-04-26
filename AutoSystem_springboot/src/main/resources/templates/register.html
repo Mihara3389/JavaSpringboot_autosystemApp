@@ -12,9 +12,10 @@
 		<a th:href="@{'/top'}" >top</a>
 		<a th:href="@{'/logout'}" >logout</a>
 </div>
-<form class="box" role="form" id="register"  th:action="@{/register}" th:object="${confirmRequest}" method="post">
+<form class="box" role="form" id="register"  th:action="@{/register}" th:object="${confrimRequest}" method="post">
+	<h1>Registration</h1>
 	<div th:if="${validationError}" th:each="error : ${validationError}" style="color:red;" th:text="${error}"></div> 
-    <table id="tbl">
+	<table id="tbl">
     	<tr>	
     		<td>問題：</td>
     		<td><input type="text" id="question" name="question" placeholder="Question" autofocus="autofocus" ></td>
