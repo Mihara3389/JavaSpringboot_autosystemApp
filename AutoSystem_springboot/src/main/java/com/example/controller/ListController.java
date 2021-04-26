@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.example.dto.ConfrimRequest;
 import com.example.dto.DeleteForm;
 import com.example.dto.ListForm;
 import com.example.entity.AnswersEntity;
@@ -31,6 +32,18 @@ import com.example.service.QuestionsService;
 	@Autowired
 	private AnswersService answersService;
 	/**
+	 * 新規登録画面を表示
+	 * @param model Model
+	 * @return 新規登録画面
+	 */
+	@RequestMapping(params="action=register")
+	public String postRegister(Model model) {
+		
+		model.addAttribute("confirmRequest}", new ConfrimRequest());
+		return "register";
+	}
+	
+	/**
 	 * 削除データを表示
 	 * @param model Model
 	 * @return 削除
@@ -48,42 +61,41 @@ import com.example.service.QuestionsService;
 		int db_answers_QuestionId=0;
 		int count =0;
 		//questionsループ
-				for(int i = 0; i < questionsEntity.size(); i++) {
-					if(questionsEntity.isEmpty()) {
-						continue;
-					}else {
-						//問題を取得
-						db_questionsId = questionsEntity.get(i).getId();
-						if(db_questionsId==questionId) {
-						//answersループ
-						for(int j = 0; j < answerEntity.size(); j++) {
-							//nullチェック
-							AnswersEntity answer = answerEntity.get(j); 
-							if (answer == null) { 
-								continue; 
-							}
-							//照合
-							db_answersId = answerEntity.get(j).getId();
-							db_answers_QuestionId = answerEntity.get(j).getQuestion_id();
-							if(db_questionsId == db_answers_QuestionId) {
-								//箱を新しくする(じゃないと同じ箱を使いまわしリスト状態にならない）
-								DeleteForm deletelist = new DeleteForm();
-								//同じ問題IDの答え数
-								count = count+1;
-								//値をつめる
-								deletelist.setId(db_questionsId);
-								deletelist.setQuestion(questionsEntity.get(i).getQuestion());
-								deletelist.setAnswer_count(count);
-								deletelist.setAnswer_id(Integer.toString(db_answersId));	
-								deletelist.setAnswer(answerEntity.get(j).getAnswer());	
-								//リストへつめる
-								deleteForm.add(deletelist);
-							}
+		for(int i = 0; i < questionsEntity.size(); i++) {
+			if(questionsEntity.isEmpty()) {
+				continue;
+			}else {
+				//問題を取得
+				db_questionsId = questionsEntity.get(i).getId();
+				if(db_questionsId==questionId) {
+				//answersループ
+					for(int j = 0; j < answerEntity.size(); j++) {
+						//nullチェック
+						AnswersEntity answer = answerEntity.get(j); 
+						if (answer == null) { 
+							continue; 
 						}
+						//照合
+						db_answersId = answerEntity.get(j).getId();
+						db_answers_QuestionId = answerEntity.get(j).getQuestion_id();
+						if(db_questionsId == db_answers_QuestionId) {
+							//箱を新しくする(じゃないと同じ箱を使いまわしリスト状態にならない）
+							DeleteForm deletelist = new DeleteForm();
+							//同じ問題IDの答え数
+							count = count+1;
+							//値をつめる
+							deletelist.setId(db_questionsId);
+							deletelist.setQuestion(questionsEntity.get(i).getQuestion());
+							deletelist.setAnswer_count(count);
+							deletelist.setAnswer_id(Integer.toString(db_answersId));	
+							deletelist.setAnswer(answerEntity.get(j).getAnswer());	
+							//リストへつめる
+							deleteForm.add(deletelist);
 						}
 					}
 				}
-				model.addAttribute("deleteForm", deleteForm);
-				return "delete";
-			}
+			}			}
+			model.addAttribute("deleteForm", deleteForm);
+			return "delete";
 	}
+}
