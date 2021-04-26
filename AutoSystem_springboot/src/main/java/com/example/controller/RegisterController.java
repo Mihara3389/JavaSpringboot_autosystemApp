@@ -84,12 +84,20 @@ public class RegisterController {
     	 }else 
     	 {
     		 System.out.println("Question&Answer not has");
+    		 int count =0;
     		 List<ListForm> listForm = new ArrayList<ListForm>();
+    		 String listForm_answer =confrimRequest.getAnswer();
+    		 List<String> form_answer = Arrays.asList(listForm_answer.split(","));
     		 
+    		//答え分ループ
+ 			for(int j = 0; j < form_answer.size(); j++){
     		 ListForm list = new ListForm();
+    		 count = count + 1;
     		 list.setQuestion(confrimRequest.getQuestion());
-    		 list.setAnswer(confrimRequest.getAnswer());
+    		 list.setAnswer_id(count);	
+    		 list.setAnswer(form_answer.get(j));
     		 listForm.add(list);
+ 			}
     		 //問題・答え確認画面へ
 		 	 model.addAttribute("listForm",listForm);
 		 	 return "registerConfirm";
@@ -141,30 +149,37 @@ public class RegisterController {
 	   * @return 問題一覧画面
 	   */
 	  @RequestMapping(value="/registerConfirm",method=RequestMethod.POST,params="action=register")
-	  public String create(@ModelAttribute("list") ListForm list,BindingResult result, Model model) {
-	   
-	 		 //現在時刻を取得
-	 		 Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+	  public String create(@ModelAttribute("list") ListForm list,BindingResult result, Model model)
+	  {  
+	 		//現在時刻を取得
+	 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 	 		//取得した問題と答えをリストへ置き換える
-	 		String listForm_question=list.getQuestion();
-	 		List<String> form_question = Arrays.asList(listForm_question.split(","));
 	 		String listForm_answer =list.getAnswer();
 	 		List<String> form_answer = Arrays.asList(listForm_answer.split(","));
-	 		 //問題の追加
-	 		 QuestionsEntity q = new QuestionsEntity();
-	 		 q.setQuestion(listForm_question);
-	 		 q.setCreatedAt(timestamp);
-	 		 q.setUpdatedAt(timestamp);
-	 		 quesitonsRepository.save(q);
-	 		 //追加した問題のidを取得
-	 		QuestionsEntity questionEqual = quesitonsRepository.findByQuestionEquals(listForm_question);
-	 		 //答えの追加
-	 		 AnswersEntity a = new AnswersEntity();
-	 		 a.setAnswer(listForm_answer);
-	 		 a.setQuestionId(questionEqual.getId());
-	 		 a.setCreatedAt(timestamp);
-	 		 a.setUpdatedAt(timestamp);
-	 		 answersRepository.save(a);		  
+	 		//問題の追加
+	 		QuestionsEntity q = new QuestionsEntity();
+	 		q.setQuestion(list.getQuestion());
+	 		q.setCreatedAt(timestamp);
+	 		q.setUpdatedAt(timestamp);
+	 		quesitonsRepository.save(q);
+	 		//答えを追加
+	 		for(int j = 0; j < form_answer.size(); j++)
+		 	{
+ 				//nullチェック
+ 				if (form_answer.get(j)== null) 
+ 				{ 
+				continue; 
+ 				}
+	 			//追加した問題のidを取得
+	 			QuestionsEntity questionEqual = quesitonsRepository.findByQuestionEquals(list.getQuestion());
+	 			//答えの追加
+	 			AnswersEntity a = new AnswersEntity();
+	 			a.setAnswer(form_answer.get(j));
+	 			a.setQuestionId(questionEqual.getId());
+	 			a.setCreatedAt(timestamp);
+	 			a.setUpdatedAt(timestamp);
+	 			answersRepository.save(a);	
+	 		}
 	 		//質問・答えをDBから取得
 	 		List<QuestionsEntity> questionsEntity = questionsService.searchAll();
 	 		List<AnswersEntity> answerEntity = answersService.searchAll();

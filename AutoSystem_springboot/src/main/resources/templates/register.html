@@ -13,7 +13,6 @@
 		<a th:href="@{'/logout'}" >logout</a>
 </div>
 <form class="box" role="form" id="register"  th:action="@{/register}" th:object="${confrimRequest}" method="post">
-	<h1>Registration</h1>
 	<div th:if="${validationError}" th:each="error : ${validationError}" style="color:red;" th:text="${error}"></div> 
 	<table id="tbl">
     	<tr>	
