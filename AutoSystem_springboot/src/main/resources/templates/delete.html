@@ -10,17 +10,17 @@
 <form class="box" role="form" id="delete"  th:action="@{/delete}" method="post">
 	<a th:href="@{'/top'}" >top</a>
 	<a th:href="@{'/logout'}" >logout</a>
-    <table th:each="deleteForm : ${deleteForm}">
-		<tr th:if="${deleteForm.getAnswer_count() eq 1}">
+    <table th:each="rtltForm: ${rtltForm}">
+		<tr th:if="${rtltForm.getAnswer_count() eq 1}">
 			<td th:text="'問題：'"></td>
-      		<td><input type="text" id="question" name="question"  th:value="${deleteForm.getQuestion()}"  readonly>
-      			<input type="hidden" id="id" name="id"  th:value="${deleteForm.getId()}" >
+      		<td><input type="text" id="question" name="question"  th:value="${rtltForm.getQuestion()}"  readonly>
+      			<input type="hidden" id="id" name="id"  th:value="${rtltForm.getId()}" >
 		</td>
    	  	</tr>      
     	<tr>
        		<td th:text="'答え'"></td>
-    		<td><input type="text" id="answer" name="answer"  th:value="${deleteForm.getAnswer()}" readonly>
-    		<input type="hidden" id="answer_id" name="answer_id"  th:value="${deleteForm.getAnswer_id()}" >
+    		<td><input type="text" id="answer" name="answer"  th:value="${rtltForm.getAnswer()}" readonly>
+    		<input type="hidden" id="answer_id" name="answer_id"  th:value="${rtltForm.getAnswer_id()}" >
     		</td>
 		</tr>
 	</table>

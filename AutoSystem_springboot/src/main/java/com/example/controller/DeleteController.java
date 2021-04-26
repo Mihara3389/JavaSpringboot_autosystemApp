@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.Common;
-import com.example.dto.DeleteForm;
+import com.example.dto.ReturnlistForm;
 import com.example.dto.ListForm;
 import com.example.entity.AnswersEntity;
 import com.example.entity.QuestionsEntity;
@@ -67,7 +67,7 @@ import com.example.service.QuestionsService;
 	 * @return 問題一覧
 	 */
 	@RequestMapping(params="action=delete")
-	public String deleteReturn(@ModelAttribute("deleteForm") DeleteForm deleteForm, @ModelAttribute("listForm") ArrayList<ListForm>listForm, Model model) {
+	public String deleteReturn(@ModelAttribute("deleteForm") ReturnlistForm deleteForm, @ModelAttribute("listForm") ArrayList<ListForm>listForm, Model model) {
 		//取得した答えをリストへ置き換える
 		String deleteForm_answer_id = deleteForm.getAnswer_id();
 		List<String> form_answer_id = Arrays.asList(deleteForm_answer_id.split(","));
