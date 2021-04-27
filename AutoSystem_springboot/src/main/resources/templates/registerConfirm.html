@@ -11,8 +11,7 @@
 		<a th:href="@{'/top'}" >top</a>
 		<a th:href="@{'/logout'}" >logout</a>
 </div>
-<form class="box" role="form" id="registerConfirm"  th:action="@{/registerConfirm}" th:object="${confirmRequest}" method="post">
-	<div th:if="${validationError}" th:each="error : ${validationError}" style="color:red;" th:text="${error}"></div> 
+<form class="box" role="form" id="registerConfirm"  th:action="@{/registerConfirm}" method="post">
     <table th:each="listForm : ${listForm}"  >
     	<tr th:if="${listForm.getAnswer_id() eq 1}">	
     		<td>問題：</td>

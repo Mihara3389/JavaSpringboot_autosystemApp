@@ -73,13 +73,13 @@ public class RegisterController {
     	 {
     		 System.out.println("Question has");
     		 // データベース上にすでに存在する
-    		 model.addAttribute("validationError","*入力された質問はすでに登録済です。");
+    		 model.addAttribute("validationError","*入力された質問はすでに登録済です。入力し直してください。");
     		 return "register";
  		  
     	 }else if(answersEqual != null)
     	 {
     		 // データベース上にすでに存在する
-    		 model.addAttribute("validationError","*入力された答えはすでに登録済です。");
+    		 model.addAttribute("validationError","*入力された答えはすでに登録済です。入力し直してください。");
     		 return "register";  
     	 }else 
     	 {
@@ -88,15 +88,25 @@ public class RegisterController {
     		 List<ListForm> listForm = new ArrayList<ListForm>();
     		 String listForm_answer =confrimRequest.getAnswer();
     		 List<String> form_answer = Arrays.asList(listForm_answer.split(","));
-    		 
+    		 //変数定義
+    		 String bf_Answer="";
     		//答え分ループ
  			for(int j = 0; j < form_answer.size(); j++){
-    		 ListForm list = new ListForm();
-    		 count = count + 1;
-    		 list.setQuestion(confrimRequest.getQuestion());
-    		 list.setAnswer_id(count);	
-    		 list.setAnswer(form_answer.get(j));
-    		 listForm.add(list);
+ 				//同じ入力値がないかチェック
+ 				if(bf_Answer.equals(form_answer.get(j)) )
+ 				{
+ 					model.addAttribute("validationError","*同じ値が入力されています。入力し直してください。");			
+ 		    		return "register";  
+ 				}else 
+ 				{
+ 					ListForm list = new ListForm();
+ 					count = count + 1;
+ 					list.setQuestion(confrimRequest.getQuestion());
+ 					list.setAnswer_id(count);	
+ 					list.setAnswer(form_answer.get(j));
+ 					listForm.add(list);
+ 					bf_Answer = form_answer.get(j);
+ 				}
  			}
     		 //問題・答え確認画面へ
 		 	 model.addAttribute("listForm",listForm);
