@@ -11,14 +11,14 @@
 	<a th:href="@{'/top'}" >top</a>
 	<a th:href="@{'/logout'}" >logout</a>
     <table th:each="rtltForm: ${rtltForm}">
-		<tr th:if="${rtltForm.getAnswer_count() eq 1}">
-			<td th:text="'問題：'"></td>
+		<tr th:if="${rtltForm.getAnswer_count() eq 1} or ${rtltForm.getAnswer_count() eq 0}">
+			<td>問題：</td>
       		<td><input type="text" id="question" name="question"  th:value="${rtltForm.getQuestion()}"  readonly>
       			<input type="hidden" id="id" name="id"  th:value="${rtltForm.getId()}" >
 		</td>
    	  	</tr>      
-    	<tr>
-       		<td th:text="'答え'"></td>
+    	<tr th:unless="${rtltForm.getAnswer_count() eq 0}">
+       		<td th:if="${rtltForm.getAnswer_count() eq 1}" >答え：</td>
     		<td><input type="text" id="answer" name="answer"  th:value="${rtltForm.getAnswer()}" readonly>
     		<input type="hidden" id="answer_id" name="answer_id"  th:value="${rtltForm.getAnswer_id()}" >
     		</td>

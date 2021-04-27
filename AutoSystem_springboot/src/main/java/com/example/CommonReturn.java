@@ -61,6 +61,19 @@ public class CommonReturn
 							returnlist.add(list);
 						}
 					}
+					//質問だけしかない場合
+					if(count==0) 
+					{
+						//箱を新しくする(じゃないと同じ箱を使いまわしリスト状態にならない）
+						ReturnlistForm list = new ReturnlistForm();
+						//値をつめる
+						list.setId(db_questionsId);
+						list.setQuestion(questionsEntity.get(i).getQuestion());
+						list.setAnswer_id(Integer.toString(0));	
+						list.setAnswer(null);
+						//リストへつめる
+						returnlist.add(list);
+					}
 				}
 			}
 		}
