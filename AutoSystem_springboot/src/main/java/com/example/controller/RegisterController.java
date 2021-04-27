@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.example.Common;
 import com.example.dto.ConfrimRequest;
 import com.example.dto.ListForm;
+import com.example.dto.ReturnlistForm;
 import com.example.entity.AnswersEntity;
 import com.example.entity.QuestionsEntity;
 import com.example.repository.AnswersRepository;
@@ -85,7 +86,7 @@ public class RegisterController {
     	 {
     		 System.out.println("Question&Answer not has");
     		 int count =0;
-    		 List<ListForm> listForm = new ArrayList<ListForm>();
+    		 List<ReturnlistForm> listForm = new ArrayList<ReturnlistForm>();
     		 String listForm_answer =confrimRequest.getAnswer();
     		 List<String> form_answer = Arrays.asList(listForm_answer.split(","));
     		 //変数定義
@@ -99,10 +100,10 @@ public class RegisterController {
  		    		return "register";  
  				}else 
  				{
- 					ListForm list = new ListForm();
+ 					ReturnlistForm list = new ReturnlistForm();
  					count = count + 1;
  					list.setQuestion(confrimRequest.getQuestion());
- 					list.setAnswer_id(count);	
+ 					list.setAnswer_count(count);	
  					list.setAnswer(form_answer.get(j));
  					listForm.add(list);
  					bf_Answer = form_answer.get(j);

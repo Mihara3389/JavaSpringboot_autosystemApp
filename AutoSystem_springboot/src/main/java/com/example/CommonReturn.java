@@ -43,8 +43,8 @@ public class CommonReturn
 							continue; 
 						}
 						//照合
-						db_answersId = answerEntity.get(j).getId();
-						db_answers_QuestionId = answerEntity.get(j).getQuestion_id();
+						db_answersId = answer.getId();
+						db_answers_QuestionId = answer.getQuestion_id();
 						if(db_questionsId == db_answers_QuestionId) 
 						{
 							//箱を新しくする(じゃないと同じ箱を使いまわしリスト状態にならない）
