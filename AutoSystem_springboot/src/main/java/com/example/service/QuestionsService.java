@@ -40,6 +40,13 @@ public class QuestionsService {
   	return q;
   }
   /**
+   * 質問 更新
+   * 
+   */
+  public QuestionsEntity updateQuestion(QuestionsEntity q) {
+	  return questionsRepository.save(q);
+  }
+  /**
    * 質問 削除
    * 
    */

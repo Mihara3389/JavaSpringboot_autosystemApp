@@ -10,7 +10,7 @@
 <form class="box" role="form" id="delete"  th:action="@{/delete}" method="post">
 	<a th:href="@{'/top'}" >top</a>
 	<a th:href="@{'/logout'}" >logout</a>
-    <table th:each="rtltForm: ${rtltForm}">
+    <table id="tbl" th:each="rtltForm: ${rtltForm}">
 		<tr th:if="${rtltForm.getAnswer_count() eq 1} or ${rtltForm.getAnswer_count() eq 0}">
 			<td>問題：</td>
       		<td><input type="text" id="question" name="question"  th:value="${rtltForm.getQuestion()}"  readonly>

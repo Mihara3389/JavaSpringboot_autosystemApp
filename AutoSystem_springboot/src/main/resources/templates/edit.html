@@ -4,8 +4,8 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	 <link  th:href="@{/css/register.css}" rel="stylesheet">
 	 <link  th:href="@{/css/style.css}" rel="stylesheet">
-	 <script th:src="@{/js/AddDelete.js}"></script>
-<title>Register</title>
+	 <script th:src="@{/js/EditAddDelete.js}"></script>
+<title>Edit</title>
 </head>
 <body>
 <div class="box">
@@ -14,22 +14,22 @@
 </div>
 <form class="box" role="form" id="edit"  th:action="@{/edit}" th:object="${confirmRequest}" method="post">
 	<div th:if="${validationError}" th:each="error : ${validationError}" style="color:red;" th:text="${error}"></div> 
-    <table id="tbl"  th:each="rtltForm : ${rtltForm}">
-   		<tr th:if="${rtltForm.getAnswer_count() eq 1}">
+    <table id="tbl" th:each="rtltForm : ${rtltForm}">
+   		<tr th:if="${rtltForm.getAnswer_count() eq 1} or ${rtltForm.getAnswer_count() eq 0}">
     		<td>問題番号：</td>
     		<td><input type="text" id="id"  th:name="id"  th:value="${rtltForm.getId()}" ></td>
     	</tr>
-    	<tr th:if="${rtltForm.getAnswer_count() eq 1}">
+    	<tr th:if="${rtltForm.getAnswer_count() eq 1} or ${rtltForm.getAnswer_count() eq 0}">
     		<td>問題：</td>
     		<td><input type="text" id="question" name="question"  th:value="${rtltForm.getQuestion()}" ></td>
     	</tr>
-    	<tr>
-    		<td>答え：</td>
+    	<tr th:unless="${rtltForm.getAnswer_count() eq 0}">
+    		<td th:if="${rtltForm.getAnswer_count() eq 1}" >答え：</td>
     		<td><input type="text" id="answer" name="answer"  th:value="${rtltForm.getAnswer()}" >
     		<input type="hidden" id="answer_id" name="answer_id"  th:value="${rtltForm.getAnswer_id()}" ></td>
     	</tr>
-    </table>
-    <input type="submit" name="action" value="return" >
+   	  </table>
+ 	<input type="submit" name="action" value="return" >
     <input type="submit" name="action"  value="editCheack" >
     <input type="button" id="add" name="add" value="add" onclick="appendRow()">
 </form>

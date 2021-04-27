@@ -90,8 +90,8 @@ public class RegisterController {
     		 List<String> form_answer = Arrays.asList(listForm_answer.split(","));
     		 //変数定義
     		 String bf_Answer="";
-    		//答え分ループ
- 			for(int j = 0; j < form_answer.size(); j++){
+    		 //答え分ループ
+ 			 for(int j = 0; j < form_answer.size(); j++){
  				//同じ入力値がないかチェック
  				if(bf_Answer.equals(form_answer.get(j)) )
  				{

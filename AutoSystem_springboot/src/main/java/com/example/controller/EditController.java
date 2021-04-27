@@ -1,7 +1,7 @@
 package com.example.controller;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.example.Common;
 import com.example.dto.ConfrimRequest;
 import com.example.dto.ListForm;
+import com.example.dto.ReturnlistForm;
 import com.example.entity.AnswersEntity;
 import com.example.entity.QuestionsEntity;
-import com.example.repository.AnswersRepository;
-import com.example.repository.QuestionsRepository;
 import com.example.service.AnswersService;
 import com.example.service.QuestionsService;
 
@@ -34,11 +33,6 @@ public class EditController {
   /**
    * 質問・答え
    */
-  @Autowired
-  private QuestionsRepository quesitonsRepository;
-  @Autowired
-  private AnswersRepository answersRepository;
-  @Autowired
   private QuestionsService questionsService;
   @Autowired
   private AnswersService answersService;
@@ -47,8 +41,9 @@ public class EditController {
    * 問題・答え編集
    * @param registerRequest リクエストデータ
    * @param model Model
-   * @return 問題・答え編集画面
+   * @return 問題・答え編集確認画面
    */
+
   @RequestMapping(params="action=editCheack")
   public String editCk(@Validated @ModelAttribute ConfrimRequest confrimRequest, BindingResult result, Model model)
   {
@@ -65,44 +60,50 @@ public class EditController {
        
      } else 
      {
-    	 //データベースに一致する質問があるかチェック
-    	 QuestionsEntity questionEqual = quesitonsRepository.findByQuestionEquals(confrimRequest.getQuestion());
-    	 AnswersEntity answersEqual = answersRepository.findByAnswerEquals(confrimRequest.getAnswer());
- 	  
-    	 if(questionEqual != null)
-    	 {
-    		 System.out.println("Question has");
-    		 // データベース上にすでに存在する
-    		 model.addAttribute("validationError","*入力された質問はすでに登録済です。");
-    		 return "edit";
- 		  
-    	 }else if(answersEqual != null)
-    	 {
-    		 // データベース上にすでに存在する
-    		 model.addAttribute("validationError","*入力された答えはすでに登録済です。");
-    		 return "edit";  
-    	 }else 
-    	 {
-    		 System.out.println("Question&Answer not has");
-    		 List<ListForm> listForm = new ArrayList<ListForm>();
-    		 
-    		 ListForm list = new ListForm();
-    		 list.setId(Integer.parseInt(confrimRequest.getId()));
-    		 list.setQuestion(confrimRequest.getQuestion());
-    		 list.setAnswer_id(Integer.parseInt(confrimRequest.getAnswer_id()));
-    		 list.setAnswer(confrimRequest.getAnswer());
-    		 listForm.add(list);
-    		 //問題・答え確認画面へ
-		 	 model.addAttribute(listForm);
-		 	 return "editConfirm";
-    	 }   	
-     }
+    	 int count =0;
+		 List<ReturnlistForm> rtltForm = new ArrayList<ReturnlistForm>();
+		 String listForm_answerId =confrimRequest.getAnswer_id();
+		 List<String> form_answerId = Arrays.asList(listForm_answerId.split(","));
+		 String listForm_answer =confrimRequest.getAnswer();
+		 List<String> form_answer = Arrays.asList(listForm_answer.split(","));
+		 //変数定義
+		 String bf_Answer="";
+		 //答え分ループ
+		 for(int j = 0; j < form_answer.size(); j++){
+			 	//nullチェック
+				if (form_answer.get(j)== null)
+				{ 
+				continue; 
+				}
+				//同じ入力値がないかチェック
+				if(bf_Answer.equals(form_answer.get(j)) )
+				{
+					model.addAttribute("validationError","*同じ値が入力されています。入力し直してください。");			
+		    		return "register";  
+				}else 
+				{
+					ReturnlistForm list = new ReturnlistForm();
+					count = count + 1;
+					list.setId(Integer.parseInt(confrimRequest.getId()));
+					list.setQuestion(confrimRequest.getQuestion());
+					list.setAnswer_count(count);
+					list.setAnswer_id(form_answerId.get(j));
+					list.setAnswer(form_answer.get(j));
+					rtltForm.add(list);		
+					bf_Answer = form_answer.get(j);
+ 				}
+ 			}
+		 //問題・答え確認画面へ
+	 	 model.addAttribute("rtltForm",rtltForm);
+	 	 return "editConfirm";
+     }   	
+    
    }
   	/**
 	 * 編集画面へ戻る
 	 * @param model Model
 	 * @return 
-	 * @return 編集
+	 * @return 問題一覧画面
 	 */
 	@RequestMapping(params="action=return")
 	public String toRedirectList(@ModelAttribute("listForm") ArrayList<ListForm>listForm,Model model) {
@@ -124,36 +125,4 @@ public class EditController {
 			//問題一覧画面へ戻る
 			return "list";
 		}
-	  /**
-	   * 問題・答え編集
-	   * @param registerRequest リクエストデータ
-	   * @param model Model
-	   * @return 問題一覧画面
-	   */
-	  @RequestMapping(value="/editConfirm",method=RequestMethod.POST,params="action=edit")
-	  public String create(@Validated @ModelAttribute ConfrimRequest registerRequest, BindingResult result, Model model) {
-	   
-	 		 //現在時刻を取得
-	 		 Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-	 		 //問題の追加
-	 		 QuestionsEntity q = new QuestionsEntity();
-	 		 q.setQuestion(registerRequest.getQuestion());
-	 		 q.setCreatedAt(timestamp);
-	 		 q.setUpdatedAt(timestamp);
-	 		 quesitonsRepository.save(q);
-	 		 //答えの追加
-	 		 AnswersEntity a = new AnswersEntity();
-	 		 a.setAnswer(registerRequest.getAnswer());
-	 		 a.setCreatedAt(timestamp);
-	 		 a.setUpdatedAt(timestamp);
-	 		 answersRepository.save(a);		  
-	 		//質問・答えをDBから取得
-	 		List<QuestionsEntity> questionsEntity = questionsService.searchAll();
-	 		List<AnswersEntity> answerEntity = answersService.searchAll();
-	 		ArrayList<ListForm> listForm  = new ArrayList<ListForm>();
-			Common com = new Common();
-			listForm = com.toCommon(questionsEntity, answerEntity, listForm);  
-	 		//問題一覧へ
-	 		return "list";
-	   }
 }

@@ -12,4 +12,6 @@ import com.example.entity.AnswersEntity;
 public interface AnswersRepository extends JpaRepository<AnswersEntity,Integer> {
 	//データベースより一致するものを探す
 	AnswersEntity findByAnswerEquals(String answer);
+	//データベースより一致するものを探す
+	AnswersEntity findByIdEquals(Integer id);
 }

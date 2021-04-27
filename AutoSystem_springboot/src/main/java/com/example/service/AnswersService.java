@@ -41,6 +41,13 @@ public class AnswersService {
   	return a;
   }
   /**
+   * 答え 更新
+   * 
+   */
+  public AnswersEntity updateAnswer(AnswersEntity a) {
+	  return answersRepository.save(a);
+  }
+  /**
    * 答え 削除
    * 
    */
