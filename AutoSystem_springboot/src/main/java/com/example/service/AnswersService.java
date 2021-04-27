@@ -32,7 +32,23 @@ public class AnswersService {
     return answersRepository.findAll();
   }
   /**
-   * 質問 削除
+   * 答え 新規登録
+ * @return 
+   * 
+   */
+  public AnswersEntity saveAnswer(String answer) {
+  	AnswersEntity a = answersRepository.findByAnswerEquals(answer);
+  	return a;
+  }
+  /**
+   * 答え 更新
+   * 
+   */
+  public AnswersEntity updateAnswer(AnswersEntity a) {
+	  return answersRepository.save(a);
+  }
+  /**
+   * 答え 削除
    * 
    */
   public void deleteAnswer(Integer id) {

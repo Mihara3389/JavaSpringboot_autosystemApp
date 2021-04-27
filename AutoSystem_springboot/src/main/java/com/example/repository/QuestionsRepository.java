@@ -9,4 +9,9 @@ import com.example.entity.QuestionsEntity;
  * 質問 Repository
  */
 @Repository
-public interface QuestionsRepository extends JpaRepository<QuestionsEntity,Integer> {}
+public interface QuestionsRepository extends JpaRepository<QuestionsEntity,Integer> {
+	//データベースより一致するものを探す
+	QuestionsEntity findByQuestionEquals(String question);
+	//データベースより一致するものを探す
+	QuestionsEntity findByIdEquals(Integer id);
+}

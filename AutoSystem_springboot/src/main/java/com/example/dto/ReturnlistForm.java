@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 //Serializableインターフェース
-public class  DeleteForm implements Serializable {
+public class  ReturnlistForm implements Serializable {
   private static final long serialVersionUID = 1L;
 
   //privateメンバ変数で定義
@@ -14,9 +14,9 @@ public class  DeleteForm implements Serializable {
   private int answer_count;
   private String answer;
 //リスト型用
-  private List<DeleteForm> listForm;
+  private List<ReturnlistForm> listForm;
 
-  public DeleteForm(int id, String question, String answer_id,int answer_count, String answer) {
+  public ReturnlistForm(int id, String question, String answer_id,int answer_count, String answer) {
       this.id = id;
       this.question = question;
       this.answer_count =answer_count;
@@ -25,7 +25,7 @@ public class  DeleteForm implements Serializable {
   }
 
   //引数無しのコンストラクタ
-  public DeleteForm() {
+  public ReturnlistForm() {
   }
 
   //getter(参照するためのアクセッサー）/setter(設定するためのアクセッサ-）
@@ -68,11 +68,11 @@ public class  DeleteForm implements Serializable {
       this.answer = answer;
   }
 
-public List<DeleteForm> getListForm() {
+public List<ReturnlistForm> getListForm() {
 	return listForm;
 }
 
-public void setListForm(List<DeleteForm> listForm) {
+public void setListForm(List<ReturnlistForm> listForm) {
 	this.listForm = listForm;
 }
   

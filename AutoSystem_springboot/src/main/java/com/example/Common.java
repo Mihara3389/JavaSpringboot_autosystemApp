@@ -33,7 +33,8 @@ public class Common
 				}
 				//照合
 				db_answersId = answerEntity.get(j).getQuestion_id();
-				if(db_questionsId == db_answersId) 
+				//質問のidと答えの問題idが一致する場合
+				if(db_questionsId == db_answersId)
 				{
 					//箱を新しくする(じゃないと同じ箱を使いまわしリスト状態にならない）
 					ListForm list = new ListForm();
@@ -47,6 +48,19 @@ public class Common
 					//リストへつめる
 					returnlist.add(list);
 				}
+			}
+			//質問だけしかない場合
+			if(count==0) 
+			{
+				//箱を新しくする(じゃないと同じ箱を使いまわしリスト状態にならない）
+				ListForm list = new ListForm();
+				//値をつめる
+				list.setId(db_questionsId);
+				list.setQuestion(questionsEntity.get(i).getQuestion());
+				list.setAnswer_id(0);	
+				list.setAnswer(null);
+				//リストへつめる
+				returnlist.add(list);
 			}
 		}
 		return returnlist;
