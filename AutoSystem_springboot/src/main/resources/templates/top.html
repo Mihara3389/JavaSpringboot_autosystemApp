@@ -8,12 +8,11 @@
 </head>
 <body>
 <form class="box" role="form" th:action="@{/top}" method="post">
+	<div class="form"><a th:href="@{'/logout'}" >logout</a></div>
 	<h1>Top</h1>
     <button type="submit" name="action" value="list">問題と答えを確認・登録する　＞</button>  
     <button type="submit" name="action" value="test">テストをする　　　　　　　　＞</button>
     <button type="submit" name="action" value="history">過去の採点結果をみる　　　　＞</button>
-  	<br />
-	<a th:href="@{'/logout'}" >logout</a>
 </form>
 </body>
 </html>

@@ -8,9 +8,10 @@
 </head>
 <body>
 <form class="box" role="form" id="test"  th:action="@{/test}" method="post">
-	<a th:href="@{'/top'}" >top</a>
-	<a th:href="@{'/logout'}" >logout</a>
-	<h1>テスト</h1>
+	<div class="form">
+		<a th:href="@{'/top'}" >top</a>
+		<a th:href="@{'/logout'}" >logout</a>
+	</div>
     <table th:each="questions : ${questions}" >
    	<tr>
    		<td><label><input type="text" id="questions_id"  th:name="questions_id"  th:value="${questions.id}" readonly ></label></td>
@@ -21,6 +22,7 @@
 		<td><input type="text" id="answer" name="answer" placeholder="Answer" ></td>
   	</tr>
 	</table>
+	<br>
 	<input type="submit" class="submit" name="action" value="Cheack">
 </form>
 </body>

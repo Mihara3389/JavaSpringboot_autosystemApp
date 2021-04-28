@@ -1,21 +1,57 @@
+ /*ログアウトボタンの配置・スタイル*/
+.form 
+{
+  text-align:right;
+}
+.form a
+{
+  color: white;
+  text-transform: uppercase;
+  font-weight: 500;
+}
  /*エリア内のスタイル*/
-.box{
-	width: 600px;
-    padding: 10px;
+.box
+{ 
+	width: 700px;
+    padding: 40px;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    left: 20%;
     background: #191919;
     text-align: center;
 }
- 
-h1{
+/* タイトル配下の配置・スタイル */
+.box
+{
     color: white;
     text-transform: uppercase;
     font-weight: 500;
 }
-table{
+.box input[id="id"],.box input[id="answer_id" ]
+{
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    padding: 14px 10px;
+    width: 20px;
+    outline: none;
     color: white;
-    text-transform: uppercase;
+    border-radius: 24px;
+    transition: 0.25s;
+    background: #191919;
+}
+.box input[id="question"],.box input[id="answer" ]
+{
+    border: 0;
+    background: none;
+    display: block;
+    text-align: center;
+    border: 2px solid #3498db;
+    padding: 14px 10px;
+    width: 400px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
 }

@@ -13,12 +13,13 @@ function appendRow()
     var c1 = row.insertCell(0);
     var c2 = row.insertCell(1);
     var c3 = row.insertCell(2);
-  
+
     // 各列に表示内容を設定
-    c1.innerHTML = '<input class="inpval" type="text"   id="answer' + count + '"  name="answer"placeholder="Answer" autofocus="autofocus" >';
-    c2.innerHTML = '<input class="inpval" type="hidden"   id="answer_id' + count + '"  name="answer_id"placeholder="Answer_id" autofocus="autofocus" >';
+    c1.innerHTML = '<td>&emsp;&emsp;&emsp;</td>';
+    c2.innerHTML = '<td><input type="text" id="answer" name="answer" placeholder="Answer" autofocus="autofocus" ></td>';
     c3.innerHTML = '<input class="delbtn" type="button" id="delBtn' + count + '"  value="delete" onclick="deleteRow(this)">';
 
+    		
     // 追加した行の入力フィールドへフォーカスを設定
     var objInp = document.getElementById("answer[' + count + ']" );
     if (objInp)
