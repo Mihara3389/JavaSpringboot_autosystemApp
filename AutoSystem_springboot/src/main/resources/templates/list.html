@@ -13,7 +13,7 @@
 	<a th:href="@{'/logout'}" >logout</a>
 </div>
 <input type="submit" name="action" value="register">
-<table th:each="listForm : ${listForm}"  th:object="${deleteObject}">
+<table th:each="listForm : ${listForm}"  th:object="${listForm}">
 	<tr th:if="${listForm.getAnswer_id() eq 1} or ${listForm.getAnswer_id() eq 0}">
 		<td th:text="問題："></td>
 		<td><input type="text"  id="id" name="id"  th:value="${listForm.getId()}"  readonly></td>

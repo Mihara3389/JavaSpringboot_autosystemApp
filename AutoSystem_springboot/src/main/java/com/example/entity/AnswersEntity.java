@@ -33,7 +33,7 @@ import lombok.Data;
 	   * question_id
 	   */
 	  @Column(name="question_id")
-	  private int question_id;
+	  private int questionId;
 
 	  /**
 	   * 答え
@@ -61,10 +61,10 @@ import lombok.Data;
 	    }
 	  
 	  public int getQuestionId() {
-			return this.question_id;
+			return this.questionId;
 		}
-	  public void setQuestionId(int question_id) {
-	        this.question_id = question_id;
+	  public void setQuestionId(int questionId) {
+	        this.questionId = questionId;
 	    }
 	  
 	  public void setAnswer(String answer) {
