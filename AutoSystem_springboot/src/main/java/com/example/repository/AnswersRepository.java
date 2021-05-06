@@ -1,5 +1,7 @@
 package com.example.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,8 +12,10 @@ import com.example.entity.AnswersEntity;
  */
 @Repository
 public interface AnswersRepository extends JpaRepository<AnswersEntity,Integer> {
-	//データベースより一致するものを探す
+	//データベースに該当する答えを探す
 	AnswersEntity findByAnswerEquals(String answer);
-	//データベースより一致するものを探す
+	//データベースに一致するIdを探す
 	AnswersEntity findByIdEquals(Integer id);
+	//データベースに一致する質問Idを探す
+	List<AnswersEntity> findByQuestionIdEquals(Integer questionId);
 }

@@ -8,25 +8,30 @@
 </head>
 <body>
 <form class="box" role="form" id="delete"  th:action="@{/delete}" method="post">
+<div class="form">
 	<a th:href="@{'/top'}" >top</a>
 	<a th:href="@{'/logout'}" >logout</a>
-    <table id="tbl" th:each="rtltForm: ${rtltForm}">
-		<tr th:if="${rtltForm.getAnswer_count() eq 1} or ${rtltForm.getAnswer_count() eq 0}">
-			<td>問題：</td>
-      		<td><input type="text" id="question" name="question"  th:value="${rtltForm.getQuestion()}"  readonly>
-      			<input type="hidden" id="id" name="id"  th:value="${rtltForm.getId()}" >
+</div>
+<br>
+<table th:each="rtltForm: ${rtltForm}">
+	<tr th:if="${rtltForm.getAnswer_count() eq 1} or ${rtltForm.getAnswer_count() eq 0}">
+		<td>問題：</td>
+   		<td><input type="text" id="question" name="question"  th:value="${rtltForm.getQuestion()}"  readonly>
+   			<input type="hidden" id="id" name="id"  th:value="${rtltForm.getId()}" >
 		</td>
-   	  	</tr>      
-    	<tr th:unless="${rtltForm.getAnswer_count() eq 0}">
-       		<td th:if="${rtltForm.getAnswer_count() eq 1}" >答え：</td>
-    		<td><input type="text" id="answer" name="answer"  th:value="${rtltForm.getAnswer()}" readonly>
-    		<input type="hidden" id="answer_id" name="answer_id"  th:value="${rtltForm.getAnswer_id()}" >
-    		</td>
-		</tr>
-	</table>
-    <input type="submit" name="action" value="return">
-    <input type="submit" name="action" value="delete">
-	<br />
+  	</tr>
+   	<tr th:unless="${rtltForm.getAnswer_count() eq 0}">
+   		<td th:if="${rtltForm.getAnswer_count() eq 1}" >答え：</td>
+   		<td th:if="${rtltForm.getAnswer_count() ne 1}" > &emsp;&emsp;&emsp;</td>
+   		<td><input type="text" id="answer" name="answer"  th:value="${rtltForm.getAnswer()}" readonly>
+   		<input type="hidden" id="answer_id" name="answer_id"  th:value="${rtltForm.getAnswer_id()}" >
+   		</td>
+	</tr>
+</table>
+<br>
+<input type="submit" name="action" value="return">
+<input type="submit" name="action" value="delete">
+<br />
 </form>
 </body>
 </html>

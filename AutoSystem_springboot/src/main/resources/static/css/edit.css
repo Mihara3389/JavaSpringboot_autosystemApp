@@ -12,20 +12,21 @@
  /*エリア内のスタイル*/
 .box
 { 
-	width: 600px;
+	width: 700px;
     padding: 40px;
-    left: 25%;
     position: absolute;
+    left: 20%;
     background: #191919;
     text-align: center;
 }
+/* タイトル配下の配置・スタイル */
 .box
 {
     color: white;
     text-transform: uppercase;
     font-weight: 500;
 }
-.box input[id="questions_id"]
+.box input[id="id"]
 {
     border: 0;
     background: none;
@@ -40,7 +41,7 @@
     transition: 0.25s;
     background: #191919;
 }
-.box input[id="questions_question"],.box input[id="answer" ]
+.box input[id="question"],.box input[id="answer" ]
 {
     border: 0;
     background: none;

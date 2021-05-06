@@ -15,10 +15,12 @@ function appendRow()
     var c3 = row.insertCell(2);
 
     // 各列に表示内容を設定
-    c1.innerHTML = '&emsp;&emsp;&emsp;';
-    c2.innerHTML = '<input class="inpval" type="text"   id="answer' + count + '"  name="answer"placeholder="Answer" autofocus="autofocus" >';
+    c1.innerHTML = '<td> &emsp;&emsp;&emsp;&emsp;&emsp;</td>';
+    c2.innerHTML = '<td><input type="text" id="answer" name="answer">'+
+   				   '<input type="hidden" id="answer_id' + count + '" name="answer_id"  ></td>';
     c3.innerHTML = '<input class="delbtn" type="button" id="delBtn' + count + '"  value="delete" onclick="deleteRow(this)">';
 
+    		
     // 追加した行の入力フィールドへフォーカスを設定
     var objInp = document.getElementById("answer[' + count + ']" );
     if (objInp)
@@ -35,8 +37,8 @@ function deleteRow(obj)
 
     if (objTBL)
         objTBL.deleteRow(objTR.sectionRowIndex);
-
-    // id/name ふり直し
+        
+  	// id/name ふり直し
     var tagElements = document.getElementsByTagName("input");
     if (!tagElements)
         return false;

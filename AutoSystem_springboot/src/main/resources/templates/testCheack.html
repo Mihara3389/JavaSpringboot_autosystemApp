@@ -8,8 +8,10 @@
 </head>
 <body>
 <div class="box">
-	<a th:href="@{'/top'}" >top</a>
-	<a th:href="@{'/logout'}" >logout</a>
+	<div class="form">
+		<a th:href="@{'/top'}" >top</a>
+		<a th:href="@{'/logout'}" >logout</a>
+	</div>
 	<h1>テスト結果</h1>
 	<table>
     	<tr>
@@ -21,10 +23,10 @@
     	<tr>
    	     <td th:text="${resultForm.getResulttest()}+'点でした。'"></td>
    	    </tr>
-   	    <tr>
-	     <td th:text="${resultForm.getCurrentime()}"></td>
-	    </tr>
-	</table>
+   	</table>
+   	<div class="form">
+   	     <div th:text="${resultForm.getCurrentime()}"></div>
+	</div>
 </div>
 </body>
 </html>

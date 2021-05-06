@@ -19,9 +19,11 @@
     	</tr>
     	<tr>
     		<td th:if="${listForm.getAnswer_count() eq 1}">答え：</td>
+    		<td th:if="${listForm.getAnswer_count() ne 1}" > &emsp;&emsp;&emsp;</td>
     		<td><input type="text" id="answer" name="answer" th:value="${listForm.getAnswer()}" readonly></td>
     	</tr>
     </table>
+    <br>
     <input type="submit" name="action" value="return">
     <input type="submit" name="action" value="register">
 </form>

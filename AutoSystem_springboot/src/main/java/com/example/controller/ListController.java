@@ -50,7 +50,7 @@ public class ListController
 	 * @return 編集
 	 */
 	@RequestMapping(params="action=edit")
-	public String postEdit(@ModelAttribute("listForm") ListForm listForm,@ModelAttribute("rtltForm") ArrayList<ReturnlistForm> rtltForm, Model model) 
+	public String postEdit(@ModelAttribute("list") ListForm listForm,@ModelAttribute("rtltForm") ArrayList<ReturnlistForm> rtltForm, Model model) 
 	{
 		//取得した問題idを使用して問題と答えを取得する
 		List<QuestionsEntity> questionsEntity = questionsService.searchAll();
@@ -68,7 +68,7 @@ public class ListController
 	 * @return 削除
 	 */
 	@RequestMapping(params="action=delete")
-	public String postDelete(@ModelAttribute("listForm") ListForm listForm,@ModelAttribute("rtltForm") ArrayList<ReturnlistForm> rtltForm,Model model) 
+	public String postDelete(@ModelAttribute("list") ListForm listForm,@ModelAttribute("rtltForm") ArrayList<ReturnlistForm> rtltForm,Model model) 
 	{
 		//取得した問題idを使用して問題と答えを取得する
 				List<QuestionsEntity> questionsEntity = questionsService.searchAll();
