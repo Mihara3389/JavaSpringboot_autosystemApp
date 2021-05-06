@@ -68,22 +68,24 @@ import com.example.service.QuestionsService;
 	 */
 	@RequestMapping(params="action=delete")
 	public String deleteReturn(@ModelAttribute("rtltForm") ReturnlistForm rtltForm, @ModelAttribute("listForm") ArrayList<ListForm>listForm, Model model) {
-		//取得した答えをリストへ置き換える
-		String rtltForm_answer_id = rtltForm.getAnswer_id();
-		List<String> form_answer_id = Arrays.asList(rtltForm_answer_id.split(","));
 		//削除対象の質問idを取得し削除する
 		int question_id =rtltForm.getId();
 		questionsService.deleteQuestion(question_id);
 		//答えを順に削除していく
-		for(int i = 0; i < form_answer_id.size(); i++) {
-			String answer_id = form_answer_id.get(i);
-			int int_answer_id = Integer.parseInt(answer_id);
-			answersService.deleteAnswer(int_answer_id);
+		String rtltForm_answer_id = rtltForm.getAnswer_id();
+		List<String> form_answer_id  = new ArrayList<String>();
+		if(rtltForm_answer_id != null) {
+			form_answer_id = Arrays.asList(rtltForm_answer_id.split(","));
+			for(int i = 0; i < form_answer_id.size(); i++) {
+				String answer_id = form_answer_id.get(i);
+				int int_answer_id = Integer.parseInt(answer_id);
+				answersService.deleteAnswer(int_answer_id);
+			}
 		}
 		//質問・答えをDBから取得
 		List<QuestionsEntity> questionsEntity = questionsService.searchAll();
 		List<AnswersEntity> answerEntity = answersService.searchAll();
-		//質問がDBに一軒もなかったら、新規登録画面へ
+		//質問がDBに一件もなかったら、新規登録画面へ
 		if(questionsEntity.isEmpty()) 
 		{
 			//問題・答えの新規登録画面へforward
