@@ -7,19 +7,32 @@
 <title>List</title>
 </head>
 <body>
-<form class="box" th:action="@{/list}" method="post">
+<div class="box" >
+<form th:action="@{/list}" method="post">
 <div class="form">
 	<a th:href="@{'/top'}" >top</a>
 	<a th:href="@{'/logout'}" >logout</a>
 </div>
 <input type="submit" name="action" value="register">
-<table th:each="listForm : ${listForm}"  th:object="${listForm}">
+</form>
+<table th:each="listForm : ${listForm}" >
 	<tr th:if="${listForm.getAnswer_id() eq 1} or ${listForm.getAnswer_id() eq 0}">
 		<td th:text="問題："></td>
 		<td><input type="text"  id="id" name="id"  th:value="${listForm.getId()}"  readonly></td>
 		<td><input type="text" id="question" name="question"  th:value="${listForm.getQuestion()}"  readonly></td>
-		<td><input type="submit" name="action" value="edit"></td>
-   		<td><input type="submit" name="action" value="delete"></td></tr>
+		<td>
+		<form th:action="@{/list}" method="post" th:object="${list}">			
+		<input type="submit" name="action" th:value="edit">
+		<input type="hidden" name="id" th:value="${listForm.getId()}">
+		</form>
+		</td>
+   		<td>
+   		<form th:action="@{/list}" method="post" th:object="${list}">			
+		<input type="submit" name="action" th:value="delete">
+		<input type="hidden" name="id" th:value="${listForm.getId()}" >
+		</form>
+		</td>
+	</tr>
    	<tr th:unless ="${listForm.getAnswer_id() eq 0}">
    		<td th:text="答え："></td>
    		<td ><input type="text" id="answer_id" name="answer_id"  th:value="${listForm.getAnswer_id()}"  readonly></td>
@@ -28,6 +41,6 @@
 		<td></td>
 	</tr>
 </table>
-</form>	      
+</div>
 </body>
 </html>

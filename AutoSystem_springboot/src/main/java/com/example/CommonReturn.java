@@ -44,7 +44,7 @@ public class CommonReturn
 						}
 						//照合
 						db_answersId = answer.getId();
-						db_answers_QuestionId = answer.getQuestion_id();
+						db_answers_QuestionId = answer.getQuestionId();
 						if(db_questionsId == db_answers_QuestionId) 
 						{
 							//箱を新しくする(じゃないと同じ箱を使いまわしリスト状態にならない）

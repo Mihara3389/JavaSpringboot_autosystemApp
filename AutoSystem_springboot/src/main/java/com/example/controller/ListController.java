@@ -10,13 +10,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.example.CommonReturn;
 import com.example.dto.ConfrimRequest;
 import com.example.dto.ListForm;
 import com.example.dto.ReturnlistForm;
 import com.example.entity.AnswersEntity;
 import com.example.entity.QuestionsEntity;
-import com.example.repository.AnswersRepository;
-import com.example.repository.QuestionsRepository;
+import com.example.service.AnswersService;
+import com.example.service.QuestionsService;
 
 /**
  *	List Controller
@@ -29,9 +30,9 @@ public class ListController
 	 * List Service
 	 */
 	@Autowired
-	private QuestionsRepository quesitonsRepository;
+	private QuestionsService questionsService;
 	@Autowired
-	private AnswersRepository answersRepository;
+	private AnswersService answersService;
   /**
    * 問題・答え新規登録画面を表示
    * @param model Model
@@ -49,33 +50,16 @@ public class ListController
 	 * @return 編集
 	 */
 	@RequestMapping(params="action=edit")
-	public String postEdit(@ModelAttribute("listForm") ListForm listForm, Model model) 
+	public String postEdit(@ModelAttribute("list") ListForm listForm,@ModelAttribute("rtltForm") ArrayList<ReturnlistForm> rtltForm, Model model) 
 	{
-		//画面よりidを取得する
-		List<ReturnlistForm> returnlist = new ArrayList<ReturnlistForm>();
-		int questionId =listForm.getId();
-		int count =0;
 		//取得した問題idを使用して問題と答えを取得する
-		QuestionsEntity q = quesitonsRepository.findByIdEquals(questionId);
-		List<AnswersEntity> a = answersRepository.findByQuestionIdEquals(questionId);
+		List<QuestionsEntity> questionsEntity = questionsService.searchAll();
+		List<AnswersEntity> answerEntity = answersService.searchAll();
 		//問題を取得
-		for(int j = 0; j < a.size(); j++)
-		{
-			//箱を新しくする(じゃないと同じ箱を使いまわしリスト状態にならない）
-			ReturnlistForm list = new ReturnlistForm();
-			//同じ問題IDの答え数
-			count = count+1;
-			//値をつめる
-			list.setId(questionId);
-			list.setQuestion(q.getQuestion());
-			list.setAnswer_count(count);
-			list.setAnswer_id(Integer.toString(a.get(j).getId()));	
-			list.setAnswer(a.get(j).getAnswer());	
-			//リストへつめる
-			returnlist.add(list);
-		}
+		CommonReturn crt = new CommonReturn();
+		rtltForm = crt.toCommon(listForm, questionsEntity, answerEntity, rtltForm);
 		//編集画面へ
-		model.addAttribute("rtltForm", returnlist);
+		model.addAttribute("rtltForm", rtltForm);
 		return "edit";
 	}
 	/**
@@ -84,33 +68,16 @@ public class ListController
 	 * @return 削除
 	 */
 	@RequestMapping(params="action=delete")
-	public String postDelete(@ModelAttribute("listForm") ListForm listForm, Model model) 
+	public String postDelete(@ModelAttribute("list") ListForm listForm,@ModelAttribute("rtltForm") ArrayList<ReturnlistForm> rtltForm,Model model) 
 	{
-		//画面よりidを取得する
-		List<ReturnlistForm> returnlist = new ArrayList<ReturnlistForm>();
-		int questionId =listForm.getId();
-		int count =0;
 		//取得した問題idを使用して問題と答えを取得する
-		QuestionsEntity q = quesitonsRepository.findByIdEquals(questionId);
-		List<AnswersEntity> a = answersRepository.findByQuestionIdEquals(questionId);
-		//問題を取得
-		for(int j = 0; j < a.size(); j++)
-		{
-			//箱を新しくする(じゃないと同じ箱を使いまわしリスト状態にならない）
-			ReturnlistForm list = new ReturnlistForm();
-			//同じ問題IDの答え数
-			count = count+1;
-			//値をつめる
-			list.setId(questionId);
-			list.setQuestion(q.getQuestion());
-			list.setAnswer_count(count);
-			list.setAnswer_id(Integer.toString(a.get(j).getId()));	
-			list.setAnswer(a.get(j).getAnswer());	
-			//リストへつめる
-			returnlist.add(list);
-		}
-		//削除確認画面へ
-		model.addAttribute("rtltForm", returnlist);
-		return "delete";
+				List<QuestionsEntity> questionsEntity = questionsService.searchAll();
+				List<AnswersEntity> answerEntity = answersService.searchAll();
+				//問題を取得
+				CommonReturn crt = new CommonReturn();
+				rtltForm = crt.toCommon(listForm, questionsEntity, answerEntity, rtltForm);
+				//編集画面へ
+				model.addAttribute("rtltForm", rtltForm);
+				return "delete";
 	}
 }
