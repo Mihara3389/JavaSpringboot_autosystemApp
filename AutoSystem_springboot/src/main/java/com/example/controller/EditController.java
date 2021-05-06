@@ -87,18 +87,21 @@ import com.example.service.QuestionsService;
 					return "register";  
 				}else 
 				{	
-					if(form_answerId.get(j).isEmpty())
+					if(!form_answer.get(j).isEmpty()) 
 					{
-						list.setAnswer_id(empty_AnswerId);	
-					}else {
-						list.setAnswer_id(form_answerId.get(j));	
+						if(form_answerId.get(j).isEmpty())
+						{
+							list.setAnswer_id(empty_AnswerId);	
+						}else {
+							list.setAnswer_id(form_answerId.get(j));	
+						}
+						list.setId(Integer.parseInt(confrimRequest.getId()));
+						list.setQuestion(confrimRequest.getQuestion());
+						list.setAnswer_count(count);
+						list.setAnswer(form_answer.get(j));
+						rtltForm.add(list);		
+						bf_Answer = form_answer.get(j);
 					}
-					list.setId(Integer.parseInt(confrimRequest.getId()));
-					list.setQuestion(confrimRequest.getQuestion());
-					list.setAnswer_count(count);
-					list.setAnswer(form_answer.get(j));
-					rtltForm.add(list);		
-					bf_Answer = form_answer.get(j);
 				 }
 	     	}
 	  		 //問題・答え確認画面へ

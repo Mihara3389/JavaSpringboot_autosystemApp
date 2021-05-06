@@ -64,7 +64,7 @@ public class RegisterController {
        model.addAttribute("validationError", errorList);
        return "register";
        
-     } else 
+     }else 
      {
     	 //データベースに一致する質問があるかチェック
     	 QuestionsEntity questionEqual = quesitonsRepository.findByQuestionEquals(confrimRequest.getQuestion());
@@ -92,28 +92,35 @@ public class RegisterController {
     		 //変数定義
     		 String bf_Answer="";
     		 //答え分ループ
- 			 for(int j = 0; j < form_answer.size(); j++){
- 				//同じ入力値がないかチェック
- 				if(bf_Answer.equals(form_answer.get(j)) )
- 				{
- 					model.addAttribute("validationError","*同じ値が入力されています。入力し直してください。");			
- 		    		return "register";  
- 				}else 
- 				{
- 					ReturnlistForm list = new ReturnlistForm();
- 					count = count + 1;
- 					list.setQuestion(confrimRequest.getQuestion());
- 					list.setAnswer_count(count);	
- 					list.setAnswer(form_answer.get(j));
- 					listForm.add(list);
- 					bf_Answer = form_answer.get(j);
+ 			 for(int j = 0; j < form_answer.size(); j++)
+ 			 {
+ 				//答え未入力チェック
+ 				if(!form_answer.get(j).isEmpty()){
+ 					//同じ入力値がないかチェック
+ 					if(bf_Answer.equals(form_answer.get(j)) )
+ 					{
+ 						model.addAttribute("validationError","*同じ値が入力されています。入力し直してください。");			
+ 						return "register";  
+ 					}else
+ 					{
+ 						if(!form_answer.get(j).isEmpty()) 
+ 						{
+ 							ReturnlistForm list = new ReturnlistForm();
+ 							count = count + 1;
+ 							list.setQuestion(confrimRequest.getQuestion());
+ 							list.setAnswer_count(count);	
+ 							list.setAnswer(form_answer.get(j));
+ 							listForm.add(list);
+ 							bf_Answer = form_answer.get(j);
+ 						}
+ 					}
  				}
  			}
-    		 //問題・答え確認画面へ
+ 	 		 //問題・答え確認画面へ
 		 	 model.addAttribute("listForm",listForm);
 		 	 return "registerConfirm";
-    	 }   	
-     }
+    	 }
+    }
    }
   	/**
 	 * 新規登録入力画面へ戻る

@@ -107,7 +107,7 @@ public class EditComfirmController {
 	 		//答えを追加
  			//編集画面のidと一致しないものは削除 			
  			List<AnswersEntity> db_qa = answersRepository.findByQuestionIdEquals(listForm_qId);
- 		 	for(int i = 0; i < db_qa.size(); i++) 
+ 			for(int i = 0; i < db_qa.size(); i++) 
  		 	{
  		 		//削除フラグ
  		 		boolean deleteTarget = true;
@@ -118,11 +118,12 @@ public class EditComfirmController {
  					answerId = Integer.parseInt(form_answerId.get(j));
  	 				if(db_qa.get(i).getId()== answerId)
  	 				{
- 	 					deleteTarget = false;		
- 		 			}
+ 	 					deleteTarget = false;	
+ 	 					break;
+ 	 				}
  		 		}
  		 		if(deleteTarget == true) {		
-					answersService.deleteAnswer(answerId);
+					answersService.deleteAnswer(db_qa.get(i).getId());
  		 		}
  		 	}
  		 	for(int k = 0; k < form_answer.size(); k++)
