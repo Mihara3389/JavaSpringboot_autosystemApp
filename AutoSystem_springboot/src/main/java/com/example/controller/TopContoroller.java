@@ -18,6 +18,7 @@ import com.example.entity.AnswersEntity;
 import com.example.entity.HistoryEntity;
 import com.example.entity.QuestionsEntity;
 import com.example.entity.UserEntity;
+import com.example.repository.AnswersRepository;
 import com.example.service.AnswersService;
 import com.example.service.HistoryService;
 import com.example.service.QuestionsService;
@@ -37,6 +38,9 @@ import com.example.service.QuestionsService;
 	private AnswersService answersService;
 	@Autowired
 	private HistoryService historyService;
+	@Autowired
+	private AnswersRepository answersRepository;
+
 	/**
 	 * 問題一覧を表示
 	 * @param model Model
@@ -70,9 +74,23 @@ import com.example.service.QuestionsService;
 	@RequestMapping(params="action=test")
 	public String postTest(Model model) {
 		//質問を取得
-		List<QuestionsEntity> questions = questionsService.searchAll();
+		List<QuestionsEntity> questionsAll = questionsService.searchAll();
+		List<QuestionsEntity> questions = new ArrayList<QuestionsEntity>();
+		//答えが存在するかチェック
+		for(int i = 0; i < questionsAll.size(); i++) 
+		{
+			int qId = questionsAll.get(i).getId();
+			QuestionsEntity q = new QuestionsEntity();
+			List<AnswersEntity> a = answersRepository.findByQuestionIdEquals(qId);		
+			if(a.isEmpty()) {
+			}else {
+				q.setId(qId);
+				q.setQuestion(questionsAll.get(i).getQuestion());
+				questions.add(q);
+			}
+		}
 		//リストの中身をシャッフル
-		Collections.shuffle(questions);
+		Collections.shuffle(questions);		
 		//テスト画面へ
 		model.addAttribute("questions", questions);
 		return "test";
