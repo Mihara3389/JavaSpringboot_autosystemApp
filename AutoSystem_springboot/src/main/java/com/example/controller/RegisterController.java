@@ -53,6 +53,8 @@ public class RegisterController {
   @RequestMapping(value="/register",method=RequestMethod.POST,params="action=registerCheack")
   public String registerCk(@Validated @ModelAttribute ConfrimRequest confrimRequest, BindingResult result, Model model)
   {
+	 //答えリストチェック用のフラグ
+	 boolean flg = false;
      //入力値のチェック
      if (result.hasErrors()) 
      {
@@ -105,6 +107,7 @@ public class RegisterController {
  					{
  						if(!form_answer.get(j).isEmpty()) 
  						{
+ 							flg = true;
  							ReturnlistForm list = new ReturnlistForm();
  							count = count + 1;
  							list.setQuestion(confrimRequest.getQuestion());
@@ -116,9 +119,15 @@ public class RegisterController {
  					}
  				}
  			}
+ 			 //リストデータが空だったら
+ 			 if(flg == false) {
+ 				model.addAttribute("validationError","*答えを入力してください。");			
+				return "register";  
+ 			 }else {
  	 		 //問題・答え確認画面へ
 		 	 model.addAttribute("listForm",listForm);
 		 	 return "registerConfirm";
+ 			 }
     	 }
     }
    }
