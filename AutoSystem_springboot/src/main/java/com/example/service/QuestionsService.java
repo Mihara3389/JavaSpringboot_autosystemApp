@@ -31,6 +31,13 @@ public class QuestionsService {
     return questionsRepository.findAll();
   }
   /**
+   * 質問 一件呼び出し検索
+   * @return 検索結果
+   */
+  public QuestionsEntity searchOne(int questionId) {
+	    return questionsRepository.findByIdEquals(questionId);
+	  }
+  /**
    * 質問 新規登録
  * @return 
    * 

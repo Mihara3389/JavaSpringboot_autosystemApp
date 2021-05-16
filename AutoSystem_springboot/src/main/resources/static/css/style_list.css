@@ -1,31 +1,27 @@
- /*ログアウトボタンの配置・スタイル*/
-.form 
-{
-  text-align:right;
-}
-.form a
-{
-  color: white;
-  text-transform: uppercase;
-  font-weight: 500;
+body{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background: #34495e;
 }
  /*エリア内のスタイル*/
 .box
 { 
-	width: 600px;
+	width: 700px;
     padding: 40px;
-    left: 25%;
     position: absolute;
+    left: 20%;
     background: #191919;
     text-align: center;
 }
+/* タイトル配下の配置・スタイル */
 .box
 {
     color: white;
     text-transform: uppercase;
     font-weight: 500;
 }
-.box input[id="questions_id"]
+.box input[id="id"],.box input[id="answer_id" ]
 {
     border: 0;
     background: none;
@@ -40,7 +36,22 @@
     transition: 0.25s;
     background: #191919;
 }
-.box input[id="questions_question"],.box input[id="answer" ]
+.box input[id="id"]
+{
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    padding: 14px 10px;
+    width: 20px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+    background: #191919;
+}
+.box input[id="question"],.box input[id="answer" ]
 {
     border: 0;
     background: none;
@@ -53,4 +64,15 @@
     color: white;
     border-radius: 24px;
     transition: 0.25s;
+}
+/*トップ・ログアウトボタンの配置・スタイル*/
+.form 
+{
+  text-align:right;
+}
+.form a
+{
+  color: white;
+  text-transform: uppercase;
+  font-weight: 500;
 }

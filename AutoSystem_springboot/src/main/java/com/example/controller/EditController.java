@@ -61,10 +61,8 @@ import com.example.service.QuestionsService;
 	     } else 
 	     {
 			 List<ReturnlistForm> rtltForm = new ArrayList<ReturnlistForm>();
-			 String listForm_answerId =confrimRequest.getAnswer_id();
-			 List<String> form_answerId = Arrays.asList(listForm_answerId.split(",",-1));
-			 String listForm_answer =confrimRequest.getAnswer();
-			 List<String> form_answer = Arrays.asList(listForm_answer.split(",",-1));
+			 List<String> form_answerId = Arrays.asList(confrimRequest.getAnswer_id().split(",",-1));
+			 List<String> form_answer = Arrays.asList(confrimRequest.getAnswer().split(",",-1));
 			 //変数定義
 	    	 int count =0;
 			 String bf_Answer="";

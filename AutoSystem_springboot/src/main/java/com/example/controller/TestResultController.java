@@ -37,10 +37,8 @@ public class TestResultController {
 		//現在時刻取得
 		Timestamp currenTime = new Timestamp(System.currentTimeMillis());
 		//取得した問題をリストへ置き換える
-		String testForm_questions_id =testForm.getQuestions_id();
-		List<String> form_questions_id = Arrays.asList(testForm_questions_id.split(","));
-		String testForm_answer =testForm.getAnswer();
-		List<String> form_answer = Arrays.asList(testForm_answer.split(","));
+		List<String> form_questions_id = Arrays.asList(testForm.getQuestions_id().split(","));
+		List<String> form_answer = Arrays.asList(testForm.getAnswer().split(","));
 		//DBの答えを取得
 		List<AnswersEntity> answers = answersService.searchAll();
 		question_count=form_questions_id.size();

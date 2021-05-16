@@ -31,6 +31,15 @@ public class AnswersService {
   public List<AnswersEntity> searchAll() {
     return answersRepository.findAll();
   }
+  
+  /**
+   * 答え 一件呼び出し検索
+   * @return 検索結果
+   */
+  public List<AnswersEntity> searchOne(int questionId) {
+	    return answersRepository.findByQuestionIdEquals(questionId);
+	  }
+  
   /**
    * 答え 新規登録
  * @return 
