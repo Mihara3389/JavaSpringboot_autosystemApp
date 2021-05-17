@@ -57,8 +57,8 @@ public class EditComfirmController {
 		int questionId =listForm.getId();
 		int count =0;
 		//取得した問題idを使用して問題と答えを取得する
-		QuestionsEntity q = quesitonsRepository.findByIdEquals(questionId);
-		List<AnswersEntity> a = answersRepository.findByQuestionIdEquals(questionId);
+		QuestionsEntity q = questionsService.searchOne(questionId);
+		List<AnswersEntity> a = answersService.searchOne(questionId);
 		//問題を取得
 		for(int j = 0; j < a.size(); j++)
 		{
@@ -93,10 +93,9 @@ public class EditComfirmController {
 	 		//取得した問題と答えをリストへ置き換える
 	 		int listForm_qId =rtltForm.getId();
 	 		String listForm_question =rtltForm.getQuestion();
-	 		String str_aId = rtltForm.getAnswer_id();
-	 		List<String> form_answerId =Arrays.asList(str_aId.split(",",-1));
-	 		String listForm_answer =rtltForm.getAnswer();
-	 		List<String> form_answer = Arrays.asList(listForm_answer.split(",",-1));
+	 		//リストする際ブランクも許容する
+	 		List<String> form_answerId =Arrays.asList(rtltForm.getAnswer_id().split(",",-1));
+	 		List<String> form_answer = Arrays.asList(rtltForm.getAnswer().split(",",-1));
 	 		//更新した問題のidを取得
  			QuestionsEntity q = quesitonsRepository.findByIdEquals(listForm_qId);
 	 		//問題の更新
@@ -126,6 +125,7 @@ public class EditComfirmController {
 					answersService.deleteAnswer(db_qa.get(i).getId());
  		 		}
  		 	}
+ 			//答えを追加する
  		 	for(int k = 0; k < form_answer.size(); k++)
  			{
  		 		//nullチェック

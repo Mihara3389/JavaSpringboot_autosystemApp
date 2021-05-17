@@ -18,7 +18,6 @@ import com.example.entity.AnswersEntity;
 import com.example.entity.HistoryEntity;
 import com.example.entity.QuestionsEntity;
 import com.example.entity.UserEntity;
-import com.example.repository.AnswersRepository;
 import com.example.service.AnswersService;
 import com.example.service.HistoryService;
 import com.example.service.QuestionsService;
@@ -38,8 +37,6 @@ import com.example.service.QuestionsService;
 	private AnswersService answersService;
 	@Autowired
 	private HistoryService historyService;
-	@Autowired
-	private AnswersRepository answersRepository;
 
 	/**
 	 * 問題一覧を表示
@@ -81,7 +78,7 @@ import com.example.service.QuestionsService;
 		{
 			int qId = questionsAll.get(i).getId();
 			QuestionsEntity q = new QuestionsEntity();
-			List<AnswersEntity> a = answersRepository.findByQuestionIdEquals(qId);		
+			List<AnswersEntity> a = answersService.searchOne(qId);		
 			if(a.isEmpty()) {
 			}else {
 				q.setId(qId);

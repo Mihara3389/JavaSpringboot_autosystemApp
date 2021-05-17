@@ -1,0 +1,55 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background: #34495e;
+}
+.box
+{
+    width: 600px;
+    padding: 40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #191919;
+    text-align: center;
+}
+/* タイトル配下の配置・スタイル */
+.box
+{
+    color: white;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+/*トップ・ログアウトボタンの配置・スタイル*/
+.form 
+{
+  text-align:right;
+}
+.form a
+{
+  color: white;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+table
+{
+    width: 100%;
+    border-collapse: collapse;
+  	font-size: 12px;
+}
+table td 
+{
+    border: 1px solid #ddd;
+    background-color:  #F5F5F5;
+    color: #111111;
+    padding: 6px;
+}
+table th
+ {
+    border: 1px solid #ddd;
+    background-color: #CBFFD3;
+    color: #111111;
+    padding: 6px;
+}

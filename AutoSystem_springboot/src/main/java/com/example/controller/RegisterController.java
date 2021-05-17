@@ -89,8 +89,7 @@ public class RegisterController {
     		 System.out.println("Question&Answer not has");
     		 int count =0;
     		 List<ReturnlistForm> listForm = new ArrayList<ReturnlistForm>();
-    		 String listForm_answer =confrimRequest.getAnswer();
-    		 List<String> form_answer = Arrays.asList(listForm_answer.split(","));
+    		 List<String> form_answer = Arrays.asList(confrimRequest.getAnswer().split(","));
     		 //変数定義
     		 String bf_Answer="";
     		 //答え分ループ
@@ -181,8 +180,7 @@ public class RegisterController {
 	 		//現在時刻を取得
 	 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 	 		//取得した問題と答えをリストへ置き換える
-	 		String listForm_answer =list.getAnswer();
-	 		List<String> form_answer = Arrays.asList(listForm_answer.split(","));
+	 		List<String> form_answer = Arrays.asList(list.getAnswer().split(","));
 	 		//問題の追加
 	 		QuestionsEntity q = new QuestionsEntity();
 	 		q.setQuestion(list.getQuestion());
